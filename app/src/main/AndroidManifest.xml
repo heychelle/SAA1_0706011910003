@@ -30,7 +30,7 @@
         <activity android:name=".StarterActivity" />
         <activity android:name=".StudentLogin" />
         <activity android:name=".StudentRegister" />
-        <activity android:name=".adapter.StudentAdapter" />
+<!--        <activity android:name=".adapter.StudentAdapter" />-->
     </application>
 
 </manifest>

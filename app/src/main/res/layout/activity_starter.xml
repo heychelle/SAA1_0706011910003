@@ -36,10 +36,10 @@
                 android:layout_width="120dp"
                 android:layout_height="140dp"
                 android:layout_marginStart="72dp"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="144dp"
                 android:background="@drawable/button_starter"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_starter"
                 app:srcCompat="@drawable/ic_baseline_group_add_24" />
 
             <ImageButton

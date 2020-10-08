@@ -134,7 +134,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
                                                 dbStudent.child(student.getUid()).removeValue(new DatabaseReference.CompletionListener() {
                                                     @Override
                                                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                                        Intent in = new Intent(context, StudentAdapter.class);
+                                                        Intent in = new Intent(context, StudentData.class);
                                                         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
                                                         context.startActivity(in);
@@ -145,7 +145,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
                                             }
                                         });
 //                                        dbStudent.child(student.getUid()).removeValue(new DatabaseReference.CompletionListener() {
-//
 //                                            @Override
 //                                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
 //
@@ -157,7 +156,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
 //                                                dialogInterface.cancel();
 //                                            }
 //                                        });
-
                                     }
                                 }, 2000);
                             }
