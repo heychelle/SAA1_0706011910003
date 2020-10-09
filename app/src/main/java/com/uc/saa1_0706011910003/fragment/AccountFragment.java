@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.uc.saa1_0706011910003.Glovar;
 import com.uc.saa1_0706011910003.LecturerDetail;
 import com.uc.saa1_0706011910003.R;
+import com.uc.saa1_0706011910003.SplashScreen;
 import com.uc.saa1_0706011910003.StarterActivity;
 import com.uc.saa1_0706011910003.model.Student;
 
@@ -85,7 +86,8 @@ public class AccountFragment extends Fragment {
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StarterActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), SplashScreen.class);
                 startActivity(intent);
             }
         });

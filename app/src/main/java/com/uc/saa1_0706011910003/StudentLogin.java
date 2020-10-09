@@ -1,16 +1,27 @@
 package com.uc.saa1_0706011910003;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.uc.saa1_0706011910003.fragment.ScheduleFragment;
+import com.uc.saa1_0706011910003.model.Student;
 
 public class StudentLogin extends AppCompatActivity implements TextWatcher {
 
@@ -18,12 +29,16 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
     TextInputLayout input_email, input_password;
     String email, password;
     Button button_login_student;
+    FirebaseAuth firebaseAuth;
+    Intent intent;
+    Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         toolbar = findViewById(R.id.toolbar_student_login);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
@@ -38,7 +53,37 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
             }
         });
 
+        button_login_student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email = input_email.getEditText().getText().toString().trim();
+                password = input_password.getEditText().getText().toString().trim();
 
+//                if (email.isEmpty()){
+//                    Toast.makeText(StudentLogin.this, "Email is Required", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (password.isEmpty()){
+//                    Toast.makeText(StudentLogin.this, "Password is Required", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+
+                firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(StudentLogin.this,"Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            intent = new Intent(StudentLogin.this, ScheduleFragment.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+//                            startActivity(new Intent(getApplicationContext().ScheduleFragment));
+                        }else{
+                            Toast.makeText(StudentLogin.this,"Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override
