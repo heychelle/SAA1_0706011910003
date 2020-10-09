@@ -1,4 +1,4 @@
-package com.uc.saa1_0706011910003.fragment;
+package com.uc.saa1_0706011910003;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uc.saa1_0706011910003.R;
+import com.uc.saa1_0706011910003.fragment.AccountFragment;
+import com.uc.saa1_0706011910003.fragment.CourseFragment;
+import com.uc.saa1_0706011910003.fragment.ScheduleFragment;
 
 public class MainFragment extends AppCompatActivity {
 
@@ -24,7 +27,6 @@ public class MainFragment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fragment);
-
 
         toolbar = findViewById(R.id.toolbar_main_frag);
         toolbar.setTitle(R.string.menu_home);
@@ -42,7 +44,6 @@ public class MainFragment extends AppCompatActivity {
                         fragment = new ScheduleFragment();
                         loadFragment(fragment);
                         return true;
-
                     case R.id.course_frag_menu:
                         toolbar.setTitle(R.string.menu_courses);
                         setSupportActionBar(toolbar);
