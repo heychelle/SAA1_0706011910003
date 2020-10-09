@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uc.saa1_0706011910003.Glovar;
@@ -28,7 +30,9 @@ public class AccountFragment extends Fragment {
     Dialog dialog;
     Student student;
     TextView text_fname, text_email, text_nim, text_gender, text_age, text_address;
-    DatabaseReference dbLecturer;
+    DatabaseReference dbStudent;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -39,20 +43,12 @@ public class AccountFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dbLecturer = FirebaseDatabase.getInstance().getReference("student");
+        dbStudent = FirebaseDatabase.getInstance().getReference("student");
 
-//        text_fname = view.findViewById(R.id.name_lect_detail);
-//        text_email = view.findViewById(R.id.gender_lect_detail);
-//        text_nim = view.findViewById(R.id.expertise_lect_detail);
-//        text_gender = view.findViewById(R.id.edit_lect_data);
-//        text_age = view.findViewById(R.id.delete_lect_data);
-//        text_address = view.findViewById(R.id.delete_lect_data);
+//        dialog = Glovar.loadingDialog(AccountFragment.this);
 
-//        dialog = Glovar.loadingDialog(this);
-
-//        intent = getIntent();
-//        pos = intent.getIntExtra("position",0);
-//        student = intent.getParcelableExtra("data_student");
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         text_fname.setText(student.getName());
         text_email.setText(student.getEmail());
@@ -68,6 +64,11 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_account_fragment, container, false);
     }
+
+//    public void logout (View view){
+//        FirebaseAuth.getInsance()signOut();
+//    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
