@@ -162,6 +162,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                         public void onSuccess(Void aVoid) {
                             dialog.cancel();
                             Intent intent;
+                            Toast.makeText(StudentRegister.this, "Student Data Updated Successful", Toast.LENGTH_SHORT).show();
                             intent = new Intent(StudentRegister.this, StudentData.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StudentRegister.this);
@@ -190,7 +191,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                         public void onSuccess(Void aVoid) {
                             mAuth.signOut();
                             Toast.makeText(StudentRegister.this, "Student Registered", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent (StudentRegister.this, StarterActivity.class);
+                            Intent intent = new Intent (StudentRegister.this, StudentRegister.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();

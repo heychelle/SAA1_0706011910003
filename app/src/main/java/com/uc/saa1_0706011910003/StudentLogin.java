@@ -1,6 +1,7 @@
 package com.uc.saa1_0706011910003;
 
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,12 +33,14 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
     FirebaseAuth firebaseAuth;
     Intent intent;
     Student student;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
 
+        dialog = Glovar.loadingDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         toolbar = findViewById(R.id.toolbar_student_login);
         input_email = findViewById(R.id.input_email);
@@ -56,12 +59,14 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
         button_login_student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
                 email = input_email.getEditText().getText().toString().trim();
                 password = input_password.getEditText().getText().toString().trim();
 
                 firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        dialog.cancel();
                         if(task.isSuccessful()){
                             Toast.makeText(StudentLogin.this,"Logged in Successfully", Toast.LENGTH_SHORT).show();
                             intent = new Intent(StudentLogin.this, MainFragment.class);

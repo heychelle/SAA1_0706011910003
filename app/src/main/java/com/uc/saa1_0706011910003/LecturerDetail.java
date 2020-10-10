@@ -72,7 +72,7 @@ public class LecturerDetail extends AppCompatActivity {
             public void onClick(View v) {
                 v.startAnimation(klik);
                 new AlertDialog.Builder(LecturerDetail.this)
-                        .setTitle("Konfirmasi")
+                        .setTitle("Confirmation")
                         .setIcon(R.drawable.diamond2)
                         .setMessage("Are you sure to delete "+lecturer.getName()+" data?")
                         .setCancelable(false)
