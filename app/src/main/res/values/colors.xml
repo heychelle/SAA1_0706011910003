@@ -6,4 +6,5 @@
     <color name="icon">#FFFEFE</color>
     <color name="red">#CA1E1E</color>
     <color name="logout">#E34949</color>
+    <color name="background">#FFF3F1</color>
 </resources>

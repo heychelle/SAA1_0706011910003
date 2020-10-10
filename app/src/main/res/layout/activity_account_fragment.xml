@@ -10,6 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:fillViewport="true"
         tools:layout_editor_absoluteX="108dp"
         tools:layout_editor_absoluteY="0dp">

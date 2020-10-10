@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StarterActivity extends AppCompatActivity {
 
-    ImageButton button_add_student, button_add_lecturer, button_add_course, button_login_student;
+    ImageView button_add_student, button_add_lecturer, button_add_course, button_login_student;
     Intent intent;
 
     @Override
