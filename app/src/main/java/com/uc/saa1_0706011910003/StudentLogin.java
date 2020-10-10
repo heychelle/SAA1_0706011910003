@@ -59,23 +59,15 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
                 email = input_email.getEditText().getText().toString().trim();
                 password = input_password.getEditText().getText().toString().trim();
 
-//                if (email.isEmpty()){
-//                    Toast.makeText(StudentLogin.this, "Email is Required", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (password.isEmpty()){
-//                    Toast.makeText(StudentLogin.this, "Password is Required", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-
                 firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(StudentLogin.this,"Logged in Successfully", Toast.LENGTH_SHORT).show();
                             intent = new Intent(StudentLogin.this, MainFragment.class);
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                            finish();
 //                            startActivity(new Intent(getApplicationContext().ScheduleFragment));
                         }else{
                             Toast.makeText(StudentLogin.this,"Error", Toast.LENGTH_SHORT).show();

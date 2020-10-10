@@ -121,8 +121,8 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         }else {
             toolbar.setTitle("Edit Student");
             button_register.setText("Edit");
-            input_email.getEditText().setFocusable(false);
-            input_password.getEditText().setFocusable(false);
+            input_email.getEditText().setEnabled(false);
+            input_password.getEditText().setEnabled(false);
 
             student = intent.getParcelableExtra("edit_data_stud");
             input_email.getEditText().setText(student.getEmail());
