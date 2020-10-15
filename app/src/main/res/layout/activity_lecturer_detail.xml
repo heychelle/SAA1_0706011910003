@@ -26,7 +26,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/abc_vector_test"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"
                 app:title="@string/lect_detail"
                 app:titleTextColor="@color/icon" />
 
@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/leftdim" />
+                app:srcCompat="@drawable/logo2"
+                android:alpha="0.5"/>
 
             <ImageView
                 android:id="@+id/imageView"
@@ -48,7 +49,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_lect_detail"
-                app:srcCompat="@drawable/diamond2" />
+                app:srcCompat="@drawable/logo2" />
 
             <TextView
                 android:id="@+id/name_lect_detail"
@@ -123,7 +124,7 @@
                 android:layout_height="56dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/button_delete"
+                android:background="@drawable/button_logout"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

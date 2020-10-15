@@ -35,7 +35,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/diamond" />
+                app:srcCompat="@drawable/logo2" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"

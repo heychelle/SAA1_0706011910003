@@ -27,10 +27,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/abc_vector_test"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"
                 app:popupTheme="@style/Theme.AppCompat.Light"
                 app:title="@string/lect_data"
-                app:titleTextColor="#FFFFFF" />
+                app:titleTextColor="#424242" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_lect_data"

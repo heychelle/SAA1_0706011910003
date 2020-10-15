@@ -110,7 +110,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
                 v.startAnimation(klik);
                 new AlertDialog.Builder(context)
                         .setTitle("Confirmation")
-                        .setIcon(R.drawable.diamond2)
+                        .setIcon(R.drawable.logo2)
                         .setMessage("Are you sure to delete "+student.getName()+" data?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

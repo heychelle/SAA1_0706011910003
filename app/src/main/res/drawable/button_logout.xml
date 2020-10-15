@@ -6,7 +6,7 @@
         android:gravity="center">
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/logout"/>
-            <corners android:radius="8dp"/>
+            <corners android:radius="24dp"/>
         </shape>
     </item>
 </ripple>
