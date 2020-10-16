@@ -8,6 +8,8 @@
     <color name="logout">#FE8082</color>
     <color name="edit">#FFCBBE</color>
     <color name="background">#FFFBFA</color>
-    <color name="complemen">#7ff0fd</color>
+    <color name="complemen">#D57080</color>
     <color name="complemen2">#64caca</color>
+    <color name="shadow">#bdbdbd</color>
+    <color name="border">#F8F5F2</color>
 </resources>

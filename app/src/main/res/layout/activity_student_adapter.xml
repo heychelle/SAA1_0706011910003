@@ -62,7 +62,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="TextView"
+                android:textColor="@color/icon"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -75,6 +77,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/nim"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toBottomOf="@+id/stud_name_card" />
@@ -85,7 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="TextView"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/stud_name_card" />
@@ -96,7 +101,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="TextView"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -109,6 +116,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/email"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +129,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/gender_stud"
+                android:textColor="@color/icon"
                 app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -131,9 +141,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="TextView"
+                android:textColor="@color/icon"
                 app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/stud_nim_card" />
@@ -145,7 +155,9 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/age_stud"
+                android:textColor="@color/icon"
                 app:layout_constraintBottom_toBottomOf="@+id/stud_gender_card"
                 app:layout_constraintStart_toEndOf="@+id/stud_gender_card"
                 app:layout_constraintTop_toBottomOf="@+id/stud_nim_card" />
@@ -157,7 +169,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="TextView"
+                android:textColor="@color/icon"
                 app:layout_constraintBottom_toBottomOf="@+id/stud_gender_card"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@+id/stud_nim_card" />
@@ -168,7 +182,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/address_stud"
+                android:textColor="@color/icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -178,32 +194,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="TextView"
+                android:textColor="@color/icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <ImageView
                 android:id="@+id/button_delete_student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/button_logout"
+                android:background="@drawable/button_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stud_address_card"
-                app:srcCompat="@android:drawable/ic_menu_delete" />
+                app:srcCompat="@drawable/delete" />
 
             <ImageView
                 android:id="@+id/button_edit_student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/button_starter"
+                android:background="@drawable/button_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_delete_student"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
+                app:srcCompat="@drawable/edit" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

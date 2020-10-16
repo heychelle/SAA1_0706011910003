@@ -53,6 +53,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_course_subject" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +64,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/day"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +90,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/text_time"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +125,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/text_lecturer"
+                android:textColor="@color/icon"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -145,8 +152,10 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/button_selector"
-                android:enabled="true"
+                android:enabled="false"
+                android:fontFamily="@font/helvetica_bold"
                 android:text="@string/button_add_course"
+                android:textColor="@color/icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_lect" />

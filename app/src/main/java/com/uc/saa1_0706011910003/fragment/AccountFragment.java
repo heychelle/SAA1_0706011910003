@@ -112,7 +112,7 @@ public class AccountFragment extends Fragment {
                 v.startAnimation(klik);
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Confirmation")
-                        .setIcon(R.drawable.diamond2)
+                        .setIcon(R.drawable.logo2)
                         .setMessage("Are you sure to logout?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

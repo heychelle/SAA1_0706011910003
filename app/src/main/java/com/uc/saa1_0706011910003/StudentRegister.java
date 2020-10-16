@@ -191,7 +191,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                         public void onSuccess(Void aVoid) {
                             mAuth.signOut();
                             Toast.makeText(StudentRegister.this, "Student Registered", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent (StudentRegister.this, StudentRegister.class);
+                            Intent intent = new Intent (StudentRegister.this, StudentData.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
@@ -261,18 +261,18 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        email = input_email.getEditText().getText().toString().trim();
-        password = input_password.getEditText().getText().toString().trim();
-        name = input_name.getEditText().getText().toString().trim();
-        nim = input_nim.getEditText().getText().toString().trim();
-        age = input_age.getEditText().getText().toString().trim();
-        address = input_address.getEditText().getText().toString().trim();
+            email = input_email.getEditText().getText().toString().trim();
+            password = input_password.getEditText().getText().toString().trim();
+            name = input_name.getEditText().getText().toString().trim();
+            nim = input_nim.getEditText().getText().toString().trim();
+            age = input_age.getEditText().getText().toString().trim();
+            address = input_address.getEditText().getText().toString().trim();
 //        gender = radio_button.getText().toString();
-        if (!email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !nim.isEmpty() && !age.isEmpty() && !address.isEmpty() ) {
-            button_register.setEnabled(true);
-        } else {
-            button_register.setEnabled(false);
-        }
+            if (!email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !nim.isEmpty() && !age.isEmpty() && !address.isEmpty() ) {
+                button_register.setEnabled(true);
+            } else {
+                button_register.setEnabled(false);
+            }
     }
 
     @Override

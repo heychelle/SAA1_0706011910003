@@ -50,6 +50,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_email"
                     android:inputType="textWebEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +70,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_password" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,6 +89,7 @@
                     android:id="@+id/TextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_fname" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,6 +107,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_nim" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +117,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/gender_stud"
+                android:textColor="@color/icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_nim" />
 
@@ -133,13 +139,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/radio_male" />
+                    android:fontFamily="@font/helvetica"
+                    android:text="@string/radio_male"
+                    android:textColor="@color/icon" />
 
                 <RadioButton
                     android:id="@+id/radio_female"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/radio_female" />
+                    android:fontFamily="@font/helvetica"
+                    android:text="@string/radio_female"
+                    android:textColor="@color/icon" />
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -156,6 +166,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_age"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -174,6 +185,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
                     android:hint="@string/input_address" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,11 +198,16 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/button_selector"
+                android:enabled="false"
+                android:fontFamily="@font/helvetica_bold"
                 android:text="@string/button_register"
+                android:textColor="@color/icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_address" />
+                app:layout_constraintTop_toBottomOf="@id/input_address"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
