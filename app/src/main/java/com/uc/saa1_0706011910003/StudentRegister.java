@@ -31,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.uc.saa1_0706011910003.adapter.StudentAdapter;
 import com.uc.saa1_0706011910003.model.Student;
 
 import java.util.HashMap;
@@ -173,6 +174,9 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 }
             });
         }
+//        if (student.getGender() != "male"){
+//            StudentAdapter.setImage(R.drawable.girl);
+//        }
     }
 
     public void addStudent(String memail, String mpassword, String mname, String mnim, String mgender, String mage, String maddress){

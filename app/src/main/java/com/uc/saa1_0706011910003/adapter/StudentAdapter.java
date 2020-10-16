@@ -85,6 +85,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
         holder.studAge.setText(student.getAge());
         holder.studAddress.setText(student.getAddress());
 
+//        ((ViewHolder) viewHolder).mImg.setImageResource(itemAdapter.getImage());
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 //        intent = getIntent();
@@ -180,7 +182,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{
         TextView studEmail, studName, studNim, studGender, studAge, studAddress;
-        ImageView button_edit, button_delete;
+        ImageView button_edit, button_delete, profile_gender;
 
         CardViewViewHolder(View itemView) {
             super(itemView);
@@ -197,6 +199,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
 
             button_edit = itemView.findViewById(R.id.button_edit_student);
             button_delete = itemView.findViewById(R.id.button_delete_student);
+
+            profile_gender = itemView.findViewById(R.id.profile_gender);
         }
 
     }

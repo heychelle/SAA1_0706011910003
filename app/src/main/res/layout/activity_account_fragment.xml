@@ -20,39 +20,43 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="304dp"
-                android:layout_height="189dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:src="@drawable/logo2"
+                android:id="@+id/imageView11"
+                android:layout_width="423dp"
+                android:layout_height="500dp"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                android:src="@drawable/back_acc"
+                app:layout_constraintBottom_toBottomOf="@+id/divider4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.488"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <View
                 android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/colorAccent"
+                android:layout_width="284dp"
+                android:layout_height="252dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="128dp"
+                android:layout_marginEnd="64dp"
+                android:background="@drawable/frame"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/name_frag_stud"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/icon"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/divider4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/divider4"
+                app:layout_constraintStart_toStartOf="@+id/divider4"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
             <TextView
@@ -64,12 +68,13 @@
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@color/icon"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
                 android:id="@+id/nim_frag_stud"
@@ -78,79 +83,70 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/email_frag_stud" />
+                android:textColor="@color/icon"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+                app:layout_constraintEnd_toEndOf="@+id/divider4"
+                app:layout_constraintStart_toStartOf="@+id/divider4"
+                app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
             <TextView
                 android:id="@+id/gender_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/gender_stud"
                 android:textColor="@color/complemen"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nim_frag_stud" />
+                app:layout_constraintTop_toBottomOf="@+id/email_frag_stud" />
 
             <TextView
                 android:id="@+id/gender_frag_stud"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/gender_text"
-                app:layout_constraintTop_toBottomOf="@+id/nim_frag_stud" />
+                app:layout_constraintTop_toTopOf="@+id/gender_text" />
 
             <TextView
                 android:id="@+id/age_frag_stud"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
-                android:textColor="@color/icon"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nim_frag_stud" />
-
-            <TextView
-                android:id="@+id/age_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/helvetica"
-                android:text="@string/age_stud"
+                android:textAlignment="center"
                 android:textColor="@color/complemen"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/age_frag_stud"
-                app:layout_constraintTop_toBottomOf="@+id/nim_frag_stud" />
+                app:layout_constraintEnd_toEndOf="@+id/divider4"
+                app:layout_constraintStart_toStartOf="@+id/divider4"
+                app:layout_constraintTop_toBottomOf="@+id/name_frag_stud" />
 
             <TextView
                 android:id="@+id/address_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/address_stud"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gender_text" />
@@ -173,6 +169,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/button_logout"
@@ -181,7 +178,41 @@
                 android:textColor="@color/icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_frag_stud" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="152dp"
+                android:layout_height="129dp"
+                android:src="@drawable/logo2"
+                app:layout_constraintEnd_toEndOf="@+id/divider4"
+                app:layout_constraintStart_toStartOf="@+id/divider4"
+                app:layout_constraintTop_toTopOf="@+id/divider4" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/helvetica"
+                android:text="@string/email"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/icon"
+                app:layout_constraintEnd_toEndOf="@+id/divider4"
+                app:layout_constraintStart_toStartOf="@+id/divider4"
+                app:layout_constraintTop_toBottomOf="@+id/age_frag_stud" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
