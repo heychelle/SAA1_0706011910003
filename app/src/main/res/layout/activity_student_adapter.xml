@@ -26,45 +26,50 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/frame"
             android:paddingBottom="0dp">
 
             <View
                 android:id="@+id/divider2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/colorAccent"
+                android:background="@color/edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_gender" />
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="0dp"
                 android:layout_height="3dp"
-                android:background="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toTopOf="@+id/divider2"
+                android:layout_marginTop="8dp"
+                android:background="@color/complemen"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_gender" />
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <ImageView
                 android:id="@+id/profile_gender"
                 android:layout_width="122dp"
-                android:layout_height="95dp"
+                android:layout_height="99dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="5dp"
+                app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logo2" />
+                app:srcCompat="@drawable/girl" />
 
             <TextView
                 android:id="@+id/stud_name_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
-                android:textColor="@color/icon"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/profile_gender"
@@ -74,12 +79,12 @@
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/nim"
                 android:textColor="@color/icon"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/profile_gender"
+                app:layout_constraintStart_toStartOf="@+id/stud_name_card"
                 app:layout_constraintTop_toBottomOf="@+id/stud_name_card" />
 
             <TextView
@@ -87,27 +92,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/stud_name_card" />
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
 
             <TextView
                 android:id="@+id/stud_email_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/divider2"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/profile_gender" />
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -115,25 +120,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="@string/email"
                 android:textColor="@color/icon"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_gender" />
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/gender_stud"
-                android:textColor="@color/icon"
-                app:layout_constraintBottom_toTopOf="@+id/divider2"
-                app:layout_constraintStart_toEndOf="@+id/profile_gender"
+                android:textColor="@color/complemen"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
@@ -141,40 +145,34 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
-                app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/stud_nim_card" />
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="32dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/age_stud"
-                android:textColor="@color/icon"
-                app:layout_constraintBottom_toBottomOf="@+id/stud_gender_card"
+                android:textColor="@color/complemen"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/stud_gender_card"
-                app:layout_constraintTop_toBottomOf="@+id/stud_nim_card" />
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/stud_age_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
-                app:layout_constraintBottom_toBottomOf="@+id/stud_gender_card"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/stud_nim_card" />
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -184,7 +182,9 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/address_stud"
-                android:textColor="@color/icon"
+                android:textColor="@color/complemen"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -194,9 +194,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -204,9 +206,11 @@
                 android:id="@+id/button_delete_student"
                 android:layout_width="35dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/button_delete"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stud_address_card"
@@ -219,8 +223,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/button_edit"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_delete_student"
+                app:layout_constraintTop_toTopOf="@+id/button_delete_student"
                 app:srcCompat="@drawable/edit" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

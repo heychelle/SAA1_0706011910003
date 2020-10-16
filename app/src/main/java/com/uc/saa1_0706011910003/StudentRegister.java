@@ -174,9 +174,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 }
             });
         }
-//        if (student.getGender() != "male"){
-//            StudentAdapter.setImage(R.drawable.girl);
-//        }
     }
 
     public void addStudent(String memail, String mpassword, String mname, String mnim, String mgender, String mage, String maddress){

@@ -85,7 +85,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
         holder.studAge.setText(student.getAge());
         holder.studAddress.setText(student.getAddress());
 
-//        ((ViewHolder) viewHolder).mImg.setImageResource(itemAdapter.getImage());
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();

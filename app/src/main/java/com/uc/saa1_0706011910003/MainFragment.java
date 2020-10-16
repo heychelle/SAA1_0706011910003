@@ -8,11 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.uc.saa1_0706011910003.R;
 import com.uc.saa1_0706011910003.fragment.AccountFragment;
 import com.uc.saa1_0706011910003.fragment.CourseFragment;
 import com.uc.saa1_0706011910003.fragment.ScheduleFragment;
