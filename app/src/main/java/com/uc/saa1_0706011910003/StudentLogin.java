@@ -75,7 +75,7 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
                             finish();
 //                            startActivity(new Intent(getApplicationContext().ScheduleFragment));
                         }else{
-                            Toast.makeText(StudentLogin.this,"Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StudentLogin.this,"Login Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
