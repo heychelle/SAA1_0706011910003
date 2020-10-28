@@ -9,10 +9,13 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity android:name=".fragment.AccountFragment"></activity>-->
-<!--        <activity android:name=".fragment.ScheduleFragment" />-->
-<!--        <activity android:name=".fragment.CourseFragment" />-->
-<!--        <activity android:name=".fragment.MainFragment" />-->
+        <activity android:name=".adapter.CourseFragmentAdapter"></activity>
+        <activity android:name=".adapter.ScheduleAdapter" />
+        <activity android:name=".CourseData" />
+        <activity android:name=".adapter.CourseAdapter" /> <!-- <activity android:name=".fragment.AccountFragment"></activity> -->
+        <!-- <activity android:name=".fragment.ScheduleFragment" /> -->
+        <!-- <activity android:name=".fragment.CourseFragment" /> -->
+        <!-- <activity android:name=".fragment.MainFragment" /> -->
         <activity android:name=".StudentData" /> <!-- <activity android:name=".adapter.StudentAdapter" /> -->
         <activity android:name=".LecturerDetail" /> <!-- <activity android:name=".adapter.LecturerAdapter" /> -->
         <activity android:name=".LecturerData" />
@@ -31,7 +34,6 @@
         <activity android:name=".StudentLogin" />
         <activity android:name=".StudentRegister" />
         <activity android:name=".MainFragment" />
-<!--        <activity android:name=".adapter.StudentAdapter" />-->
     </application>
 
 </manifest>

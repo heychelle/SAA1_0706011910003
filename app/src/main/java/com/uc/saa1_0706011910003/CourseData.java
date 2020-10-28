@@ -6,10 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -20,40 +18,40 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.uc.saa1_0706011910003.adapter.LecturerAdapter;
-import com.uc.saa1_0706011910003.adapter.StudentAdapter;
-import com.uc.saa1_0706011910003.model.Student;
+import com.uc.saa1_0706011910003.adapter.CourseAdapter;
+import com.uc.saa1_0706011910003.model.Course;
+import com.uc.saa1_0706011910003.model.Course;
 
 import java.util.ArrayList;
 
-public class StudentData extends AppCompatActivity {
+public class CourseData extends AppCompatActivity {
 
     AlphaAnimation klik = new AlphaAnimation(1F, 0.6F);
     Toolbar toolbar;
-    DatabaseReference dbStudent;
-    ArrayList<Student> listStudent = new ArrayList<>();
-    RecyclerView rv_stud_data;
-    Student student;
+    DatabaseReference dbCourse;
+    ArrayList<Course> listCourse = new ArrayList<>();
+    RecyclerView rv_course_data;
+    Course course;
     Intent intent;
     Button button_edit, button_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_data);
-        toolbar = findViewById(R.id.toolbar_stud_data);
+        setContentView(R.layout.activity_course_data);
+        toolbar = findViewById(R.id.toolbar_course_data);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        dbStudent = FirebaseDatabase.getInstance().getReference("student");
-        rv_stud_data = findViewById(R.id.rv_stud_data);
-        fetchStudentData();
+        dbCourse = FirebaseDatabase.getInstance().getReference("course");
+        rv_course_data = findViewById(R.id.rv_course_data);
+        fetchCourseData();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(StudentData.this, StudentRegister.class);
+                intent = new Intent(CourseData.this, AddCourse.class);
                 intent.putExtra("action", "add");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -62,17 +60,17 @@ public class StudentData extends AppCompatActivity {
         });
     }
 
-    public void fetchStudentData(){
-        dbStudent.addValueEventListener(new ValueEventListener() {
+    public void fetchCourseData(){
+        dbCourse.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listStudent.clear();
+                listCourse.clear();
                 for(DataSnapshot childSnapshot : snapshot.getChildren()){
-                    student = childSnapshot.getValue(Student.class);
-                    listStudent.add(student);
-                    rv_stud_data.setAdapter(null);
+                    course = childSnapshot.getValue(Course.class);
+                    listCourse.add(course);
+                    rv_course_data.setAdapter(null);
                 }
-                showStudentData(listStudent);
+                showCourseData(listCourse);
             }
 
             @Override
@@ -82,11 +80,11 @@ public class StudentData extends AppCompatActivity {
         });
     }
 
-    public void showStudentData(final ArrayList<Student> list){
-        rv_stud_data.setLayoutManager(new LinearLayoutManager(StudentData.this));
-        StudentAdapter studentAdapter = new StudentAdapter(StudentData.this);
-        studentAdapter.setListStudent(list);
-        rv_stud_data.setAdapter(studentAdapter);
+    public void showCourseData(final ArrayList<Course> list){
+        rv_course_data.setLayoutManager(new LinearLayoutManager(CourseData.this));
+        CourseAdapter CourseAdapter = new CourseAdapter(CourseData.this);
+        CourseAdapter.setListCourse(list);
+        rv_course_data.setAdapter(CourseAdapter);
 
     }
 
@@ -94,15 +92,15 @@ public class StudentData extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == android.R.id.home){
-            intent = new Intent(StudentData.this, StudentRegister.class);
+            intent = new Intent(CourseData.this, AddCourse.class);
             intent.putExtra("action", "add");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;
         }else{
-            intent = new Intent(StudentData.this, StudentRegister.class);
-            intent.putExtra("action", "edit_stud");
+            intent = new Intent(CourseData.this, AddCourse.class);
+            intent.putExtra("action", "edit_data_course");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
@@ -112,11 +110,12 @@ public class StudentData extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        intent = new Intent(StudentData.this, StudentRegister.class);
+        intent = new Intent(CourseData.this, AddCourse.class);
         intent.putExtra("action", "add");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
+
 
 }

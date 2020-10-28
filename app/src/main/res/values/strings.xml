@@ -47,6 +47,8 @@
     <string name="menu_settings">Account</string>
     <string name="logout">Logout</string>
     <string name="add_stud">Add Student</string>
+    <string name="edit_course">Edit Course</string>
+    <string name="course_list">Course List</string>
 
     <string-array name="days">
         <item>Monday</item>
@@ -54,8 +56,6 @@
         <item>Wednesday</item>
         <item>Thursday</item>
         <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
     </string-array>
 
     <string-array name="times">
@@ -315,4 +315,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="years_old">Years Old</string>
+    <string name="day_course">Day:</string>
+    <string name="time_course">Time:</string>
+    <string name="course_data">Course Data</string>
 </resources>

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import com.uc.saa1_0706011910003.LecturerDetail;
 import com.uc.saa1_0706011910003.R;
 import com.uc.saa1_0706011910003.SplashScreen;
 import com.uc.saa1_0706011910003.StarterActivity;
+import com.uc.saa1_0706011910003.StudentRegister;
 import com.uc.saa1_0706011910003.model.Lecturer;
 import com.uc.saa1_0706011910003.model.Student;
 
@@ -44,6 +46,7 @@ public class AccountFragment extends Fragment {
     Student student;
     TextView text_fname, text_email, text_nim, text_gender, text_age, text_address;
     DatabaseReference dbStudent;
+    ImageView edit_account;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
@@ -103,6 +106,15 @@ public class AccountFragment extends Fragment {
         text_gender = (TextView) getView().findViewById(R.id.gender_frag_stud);
         text_age = (TextView) getView().findViewById(R.id.age_frag_stud);
         text_address = (TextView) getView().findViewById(R.id.address_frag_stud);
+
+        edit_account = (ImageView) getView().findViewById(R.id.edit_account);
+        edit_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StudentRegister.class);
+                startActivity(intent);
+            }
+        });
 
         signout = view.findViewById(R.id.button_signout_frag);
         signout.setOnClickListener(new View.OnClickListener() {

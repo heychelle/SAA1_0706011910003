@@ -5,18 +5,39 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.uc.saa1_0706011910003.CourseData;
 import com.uc.saa1_0706011910003.R;
+import com.uc.saa1_0706011910003.adapter.CourseAdapter;
+import com.uc.saa1_0706011910003.adapter.CourseFragmentAdapter;
+import com.uc.saa1_0706011910003.model.Course;
+
+import java.util.ArrayList;
 
 public class CourseFragment extends Fragment {
 
     ImageView no_data_cour;
+    Course course;
+    RecyclerView recyclerView;
+    Adapter ScheduleAdapter;
+    DatabaseReference dbCourse;
+    ImageView imageView;
+    ArrayList<Course> listCourse = new ArrayList<>();
+
 
     public CourseFragment() {
         // Required empty public constructor
@@ -39,13 +60,51 @@ public class CourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        no_data_cour = (ImageView) getView().findViewById(R.id.image_no_cour);
 
-        no_data_cour.setOnClickListener(new View.OnClickListener() {
+//        if (listCourse.isEmpty()){
+//            imageView.setVisibility(View.VISIBLE);
+//        }else{
+//            imageView.setVisibility(View.INVISIBLE);
+//        }
+
+        dbCourse = FirebaseDatabase.getInstance().getReference("course");
+//        no_data_cour = (ImageView) getView().findViewById(R.id.image_no_course);
+        recyclerView = getView().findViewById(R.id.rv_frag_course);
+
+//        no_data_cour.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Input Your Course First!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        fetchCourseData();
+    }
+
+    public void fetchCourseData(){
+        dbCourse.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Input Your Course First!", Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listCourse.clear();
+                for(DataSnapshot childSnapshot : snapshot.getChildren()){
+                    course = childSnapshot.getValue(Course.class);
+                    listCourse.add(course);
+                    recyclerView.setAdapter(null);
+                }
+                showCourseData(listCourse);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+    }
+
+    public void showCourseData(final ArrayList<Course> list){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        CourseFragmentAdapter CourseFragmentAdapter = new CourseFragmentAdapter(getActivity());
+        CourseFragmentAdapter.setListCourse(list);
+        recyclerView.setAdapter(CourseFragmentAdapter);
+
     }
 }

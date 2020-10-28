@@ -67,11 +67,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/profile_gender"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,6 +98,7 @@
                 android:text="TextView"
                 android:textColor="@color/icon"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/stud_name_card"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="@+id/textView2" />
 
@@ -155,7 +158,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="30dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/age_stud"
                 android:textColor="@color/complemen"
@@ -168,9 +171,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/helvetica"
                 android:text="TextView"
                 android:textColor="@color/icon"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 

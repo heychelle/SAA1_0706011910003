@@ -7,17 +7,28 @@
     android:background="@color/background"
     tools:context=".fragment.AccountFragment">
 
-    <ImageView
-        android:id="@+id/image_no_sch"
-        android:layout_width="0dp"
-        android:layout_height="380dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/shadow"
-        android:elevation="10dp"
-        android:src="@drawable/no_sch"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_schedule_frag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--    <ImageView-->
+<!--        android:id="@+id/image_no_sch"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="380dp"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:background="@drawable/shadow"-->
+<!--        android:elevation="10dp"-->
+<!--        android:src="@drawable/no_sch"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
