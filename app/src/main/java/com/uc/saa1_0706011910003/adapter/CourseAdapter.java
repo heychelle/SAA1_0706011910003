@@ -100,7 +100,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
                 new AlertDialog.Builder(context)
                         .setTitle("Confirmation")
                         .setIcon(R.drawable.logo2)
-                        .setMessage("Are you sure to delete "+course.getSubject()+" data?")
+                        .setMessage("Are you sure you want to take  "+course.getSubject()+" ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override

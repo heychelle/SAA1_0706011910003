@@ -82,8 +82,7 @@ public class ScheduleFragment extends Fragment {
 //            imageView.setVisibility(View.INVISIBLE);
 //        }
 
-
-        dbCourse = FirebaseDatabase.getInstance().getReference("course");
+        dbCourse = FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses");
 //        no_data_sch = (ImageView) getView().findViewById(R.id.image_no_sch);
         recyclerView = getView().findViewById(R.id.rv_schedule_frag);
 
@@ -103,7 +102,7 @@ public class ScheduleFragment extends Fragment {
                 for(DataSnapshot childSnapshot : snapshot.getChildren()){
                     course = childSnapshot.getValue(Course.class);
                     listCourse.add(course);
-                    recyclerView.setAdapter(null);
+//                    recyclerView.setAdapter(null);
                 }
                 showCourseData(listCourse);
             }

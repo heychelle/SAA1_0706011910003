@@ -156,6 +156,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 //            toolbar.setTitle("Edit Course");
             button_add_course.setText("Edit");
             course = intent.getParcelableExtra("edit_data_course");
+
             input_course_subject.getEditText().setText(course.getSubject());
 
             int dayIndex = adapterdays.getPosition(course.getDay());
