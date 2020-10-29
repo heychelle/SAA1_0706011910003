@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.CardViewViewHolder> {
 
     private Context context;
-    DatabaseReference dbCourse;
+    DatabaseReference dbStudent;
     Dialog dialog;
     int pos = 0;
     private ArrayList<Course> listCourse;
@@ -90,16 +90,16 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.CardVi
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        dialog.cancel();
-                                            dbCourse.child("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("course").child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
+                                        dbStudent.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses").child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
                                             @Override
                                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                             Toast.makeText(context, "Course has been removed", Toast.LENGTH_SHORT).show();
                                             dialogInterface.cancel();
-                                                Log.d("id course", course.getId());
+                                            Log.d("id course", course.getId());
+
                                             }
                                         });
-
+                                        dialog.cancel();
                                     }
                                 }, 2000);
                             }
@@ -134,7 +134,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.CardVi
             crEnd = itemView.findViewById(R.id.time_end_course);
             crLecturer = itemView.findViewById(R.id.lect_course);
 
-            dbCourse = FirebaseDatabase.getInstance().getReference("course");
+            dbStudent = FirebaseDatabase.getInstance().getReference("student");
 
             dialog = Glovar.loadingDialog(context);
 

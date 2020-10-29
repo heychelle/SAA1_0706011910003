@@ -55,15 +55,19 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     Course course;
     int pos = 0;
     private ArrayList<Course> listCourse;
+
     private ArrayList<Course> getListCourse() {
         return listCourse;
     }
+
     public void setListCourse(ArrayList<Course> listCourse) {
         this.listCourse = listCourse;
     }
+
     public CourseFragmentAdapter(Context context) {
         this.context = context;
     }
+
     AlphaAnimation klik = new AlphaAnimation(1F, 0.6F);
 
     @NonNull
@@ -89,8 +93,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
         holder.crLecturer.setText(course.getLecturer());
 
 
-
-        holder.button_enroll.setOnClickListener(new View.OnClickListener(){
+        holder.button_enroll.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -98,7 +101,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                 new AlertDialog.Builder(context)
                         .setTitle("Confirmation")
                         .setIcon(R.drawable.logo2)
-                        .setMessage("Are you sure to you want to take "+course.getSubject()+" ?")
+                        .setMessage("Are you sure to you want to take " + course.getSubject() + " ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -109,19 +112,6 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                                     public void run() {
                                         dialog.cancel();
                                         CheckTime(course);
-//                                        dbCourse.child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
-//                                            @Override
-//                                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                                                Intent in = new Intent(context, CourseData.class);
-//                                                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                                Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
-////                                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(context);
-////                                                context.startActivity(in, options.toBundle());
-//                                                context.startActivity(in);
-//                                                ((Activity)context).finish();
-//                                                dialogInterface.cancel();
-//                                            }
-//                                        });
 
                                     }
                                 }, 2000);
@@ -138,71 +128,87 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
             }
         });
     }
+
     MutableLiveData<Course> courseAdd = new MutableLiveData<>();
 
-    public MutableLiveData<Course> getCourseAdd(){
+    public MutableLiveData<Course> getCourseAdd() {
         return courseAdd;
     }
 
     boolean conflict = false;
 
-    public void CheckTime(final Course choose){
+    public void CheckTime(final Course choose) {
 
-        final int  courseStart = Integer.parseInt(choose.getStart().replace(":",""));
-        final int courseEnd = Integer.parseInt(choose.getEnd().replace(":",""));
+        //user input (belum ter enroll)
+        final String courseDay = choose.getDay();
+        final int courseStart = Integer.parseInt(choose.getStart().replace(":", ""));
+        final int courseEnd = Integer.parseInt(choose.getEnd().replace(":", ""));
 
-        FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        conflict = false;
-                        for(DataSnapshot childSnapshot : snapshot.getChildren()){
-                            Course course = childSnapshot.getValue(Course.class);
-                            int crStart = Integer.parseInt(course.getStart().replace(":",""));
-                            int crEnd = Integer.parseInt(course.getEnd().replace(":",""));
+        FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                conflict = false;
+                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                    Course course = childSnapshot.getValue(Course.class);
 
-                            if (!choose.getDay().equalsIgnoreCase(course.getDay()) || crStart>=courseStart || crEnd<=courseEnd){
-                                conflict = false;
-                                Log.d("CheckFalse","False");
-                            }else{
-                                conflict = true;
-                                Log.d("CheckTrue","True");
-                                break;
-                            }
+                    //ambil dr firebase (yg sudah ter enroll)
+                    String crDay = course.getDay();
+                    int crStart = Integer.parseInt(course.getStart().replace(":", ""));
+                    int crEnd = Integer.parseInt(course.getEnd().replace(":", ""));
+
+                    //ngecek kalau jadwal berada di hari yang sama, dibandingkan dengan yang belum terenroll dengan yg sudah terenroll
+                    if (courseDay.equalsIgnoreCase(crDay)) {
+
+                        //ngecek kalau jam mulai berada dalam range waktu yang sudah diambil
+                        if (courseStart >= crStart && courseStart <= crEnd) {
+                            conflict = true;
                         }
+                        //ngecek kalau jam selesai berada dalam range waktu yang sudah diambil
+                        if (courseEnd >= crStart && courseEnd <= crEnd) {
+                            conflict = true;
+                        }
+                    }
+                }
+                if (conflict == true){
+                    //klo overlap jadwal
+                    Log.d("testConflict", "YASsss");
+                }else {
+                    //klo berhasil dalam hal apapun
+                    Log.d("testConflict", "NOOOOO");
+                }
 
-                        if (conflict){
-                            new AlertDialog.Builder(context)
-                                    .setTitle("Warning")
-                                    .setIcon(R.drawable.logo2)
-                                    .setMessage("You cannot take  "+course.getSubject()+", check again your schedule!")
-                                    .setCancelable(false)
-                                    .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                if (conflict) {
+                    //alertnya jika terjadi conflict
+                    new AlertDialog.Builder(context)
+                            .setTitle("Warning")
+                            .setIcon(R.drawable.logo2)
+                            .setMessage("You cannot take  " + course.getSubject() + ", check again your schedule!")
+                            .setCancelable(false)
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialogInterface, int i) {
+                                    dialog.show();
+                                    new Handler().postDelayed(new Runnable() {
                                         @Override
-                                        public void onClick(final DialogInterface dialogInterface, int i) {
-                                            dialog.show();
-                                            new Handler().postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    dialog.cancel();
+                                        public void run() {
+                                            dialog.cancel();
 
-                                                }
-                                            }, 2000);
                                         }
-                                    })
-                                    .create()
-                                    .show();
+                                    }, 1000);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else {
+                    courseAdd.setValue(choose);
+                }
+            }
 
-                        } else {
-                            courseAdd.setValue(choose);
-                        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+            }
+        });
     }
 
     @Override
@@ -212,40 +218,40 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
 
     public class CardViewViewHolder extends RecyclerView.ViewHolder {
 
-            TextView crSubject, crDay, crStart, crEnd, crLecturer;
-            ImageView button_enroll;
+        TextView crSubject, crDay, crStart, crEnd, crLecturer;
+        ImageView button_enroll;
 
-            CardViewViewHolder(View itemView) {
-                super(itemView);
-                crSubject = itemView.findViewById(R.id.course_subject_frag);
-                crDay = itemView.findViewById(R.id.course_day_frag);
-                crStart = itemView.findViewById(R.id.course_start_frag);
-                crEnd = itemView.findViewById(R.id.course_end_frag);
-                crLecturer = itemView.findViewById(R.id.course_lect_frag);
+        CardViewViewHolder(View itemView) {
+            super(itemView);
+            crSubject = itemView.findViewById(R.id.course_subject_frag);
+            crDay = itemView.findViewById(R.id.course_day_frag);
+            crStart = itemView.findViewById(R.id.course_start_frag);
+            crEnd = itemView.findViewById(R.id.course_end_frag);
+            crLecturer = itemView.findViewById(R.id.course_lect_frag);
 
-                dbCourse = FirebaseDatabase.getInstance().getReference("course");
+            dbCourse = FirebaseDatabase.getInstance().getReference("course");
 //                dbStudent = FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses");
 
-                dbCourse.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-                            course = childSnapshot.getValue(Course.class);
-                            listCourse.add(course);
-                        }
+            dbCourse.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        course = childSnapshot.getValue(Course.class);
+                        listCourse.add(course);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                }
+            });
 
-                dialog = Glovar.loadingDialog(context);
+            dialog = Glovar.loadingDialog(context);
 
-                button_enroll = itemView.findViewById(R.id.button_enroll);
+            button_enroll = itemView.findViewById(R.id.button_enroll);
 
-            }
+        }
 
     }
 }
