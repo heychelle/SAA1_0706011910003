@@ -29,9 +29,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910003.AddCourse;
 import com.uc.saa1_0706011910003.CourseData;
 import com.uc.saa1_0706011910003.Glovar;
@@ -45,6 +47,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
 
     private Context context;
     DatabaseReference dbCourse;
+    DatabaseReference dbStudent;
     Dialog dialog;
     int pos = 0;
     FirebaseAuth firebaseAuth;
@@ -113,6 +116,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
                                         dbCourse.child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
                                             @Override
                                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                                checkCourse(course);
                                                 Intent in = new Intent(context, CourseData.class);
                                                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
@@ -159,14 +163,41 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
             crLecturer = itemView.findViewById(R.id.lect_course);
 
             dbCourse = FirebaseDatabase.getInstance().getReference("course");
+            dbStudent = FirebaseDatabase.getInstance().getReference("student").child("courses");
 
             dialog = Glovar.loadingDialog(context);
 
             button_edit = itemView.findViewById(R.id.edit_course);
             button_delete = itemView.findViewById(R.id.delete_course);
 
+
         }
 
+    }
+    public void checkCourse(Course check){
+        String courseId = check.getId();
+        dbStudent.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot childSnapshot : snapshot.getChildren()){
+                    Course course = childSnapshot.getValue(Course.class);
+
+                    String crId = course.getId();
+
+                    if(dbStudent.child(course.getId()) == dbCourse.child(course.getId())){
+                        dbStudent.removeValue();
+                        Log.d("testValue", "yeyyyyyy");
+                    }else{
+                        Log.d("testValue", "Noooo");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

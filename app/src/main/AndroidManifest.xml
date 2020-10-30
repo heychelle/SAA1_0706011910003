@@ -12,7 +12,8 @@
         <activity android:name=".adapter.CourseFragmentAdapter"></activity>
         <activity android:name=".adapter.ScheduleAdapter" />
         <activity android:name=".CourseData" />
-        <activity android:name=".adapter.CourseAdapter" /> <!-- <activity android:name=".fragment.AccountFragment"></activity> -->
+        <activity android:name=".adapter.CourseAdapter" />
+        <!-- <activity android:name=".fragment.AccountFragment"></activity> -->
         <!-- <activity android:name=".fragment.ScheduleFragment" /> -->
         <!-- <activity android:name=".fragment.CourseFragment" /> -->
         <!-- <activity android:name=".fragment.MainFragment" /> -->

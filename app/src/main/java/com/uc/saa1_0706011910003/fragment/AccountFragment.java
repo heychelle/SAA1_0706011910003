@@ -139,6 +139,7 @@ public class AccountFragment extends Fragment {
                                         FirebaseAuth.getInstance().signOut();
                                                 Intent intent = new Intent(getActivity(), StarterActivity.class);
                                                 startActivity(intent);
+                                                getActivity().finish();
                                     }
                                 }, 2000);
                             }
