@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uc.saa1_0706011910003.EditAccount;
 import com.uc.saa1_0706011910003.Glovar;
 import com.uc.saa1_0706011910003.LecturerData;
 import com.uc.saa1_0706011910003.LecturerDetail;
@@ -111,8 +112,11 @@ public class AccountFragment extends Fragment {
         edit_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StudentRegister.class);
-                startActivity(intent);
+                Intent in = new Intent(getActivity(), EditAccount.class);
+                in.putExtra("action", "edit_profile");
+                in.putExtra("edit_data_profile", student);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(in);
             }
         });
 

@@ -169,26 +169,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
 
             button_edit = itemView.findViewById(R.id.edit_course);
             button_delete = itemView.findViewById(R.id.delete_course);
-
-
         }
 
     }
     public void checkCourse(Course check){
-        String courseId = check.getId();
+        final String courseId = check.getId();
         dbStudent.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childSnapshot : snapshot.getChildren()){
                     Course course = childSnapshot.getValue(Course.class);
+                    if (dbStudent.child(course.getId()) == dbCourse.child(course.getId())){
 
-                    String crId = course.getId();
-
-                    if(dbStudent.child(course.getId()) == dbCourse.child(course.getId())){
-                        dbStudent.removeValue();
-                        Log.d("testValue", "yeyyyyyy");
-                    }else{
-                        Log.d("testValue", "Noooo");
+//                    dbStudent
+                        String crId = course.getId();
                     }
                 }
             }

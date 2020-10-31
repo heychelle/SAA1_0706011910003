@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uc.saa1_0706011910003.adapter.StudentAdapter;
+import com.uc.saa1_0706011910003.fragment.AccountFragment;
 import com.uc.saa1_0706011910003.model.Student;
 
 import java.util.HashMap;
@@ -158,7 +159,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                     params.put("age", age);
                     params.put("address", address);
                     mDatabase.child(student.getUid()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    mDatabase.child("student").child(student.getUid()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             dialog.cancel();

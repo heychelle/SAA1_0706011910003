@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,6 +20,7 @@ public class MainFragment extends AppCompatActivity {
     Toolbar toolbar;
 //    Fragment fragment;
     BottomNavigationView bottomNavigationView;
+    String action="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,19 @@ public class MainFragment extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_main_frag);
         toolbar.setTitle(R.string.menu_home);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        action = intent.getStringExtra("edit");
+
+        if(action.equalsIgnoreCase("sch_frag")){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_main, new ScheduleFragment());
+            transaction.commit();
+        } else if(action.equalsIgnoreCase("edit_acc")){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_main, new AccountFragment());
+            transaction.commit();
+        }
 
         bottomNavigationView = findViewById(R.id.bottom_navbar_frag);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,6 +79,7 @@ public class MainFragment extends AppCompatActivity {
         transaction.replace(R.id.frame_main, fragment);
         transaction.commit();
     }
+
 
     @Override
     protected void onStart() {

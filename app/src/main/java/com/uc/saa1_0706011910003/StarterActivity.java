@@ -31,6 +31,7 @@ public class StarterActivity extends AppCompatActivity {
         if(firebaseAuth.getCurrentUser() != null){
             Toast.makeText(StarterActivity.this,"Welcome Back", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(StarterActivity.this, MainFragment.class);
+            intent.putExtra("edit", "sch_frag");
             startActivity(intent);
             finish();
         }

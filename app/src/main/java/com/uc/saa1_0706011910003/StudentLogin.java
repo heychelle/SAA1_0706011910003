@@ -70,6 +70,7 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
                         if(task.isSuccessful()){
                             Toast.makeText(StudentLogin.this,"Logged in Successfully", Toast.LENGTH_SHORT).show();
                             intent = new Intent(StudentLogin.this, MainFragment.class);
+                            intent.putExtra("edit", "sch_frag");
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();

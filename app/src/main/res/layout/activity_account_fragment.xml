@@ -203,13 +203,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/helvetica"
                 android:text="@string/email"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
             <View
                 android:id="@+id/divider5"
@@ -228,7 +229,8 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:elevation="15dp"
+                android:background="@drawable/bottom_frag_card"
+                android:elevation="20dp"
                 android:src="@drawable/ic_baseline_settings_24"
                 app:layout_constraintEnd_toEndOf="@+id/divider4"
                 app:layout_constraintTop_toTopOf="@+id/divider4" />
