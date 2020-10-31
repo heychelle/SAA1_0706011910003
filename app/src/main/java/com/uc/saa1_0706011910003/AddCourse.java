@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -52,14 +53,22 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     Button button_add_course;
     Course course;
     Dialog dialog;
-    private DatabaseReference mDatabase;
+    DatabaseReference mDatabase;
     List<String> lecturer_array;
     ArrayAdapter<CharSequence> adapterend;
+
+    DatabaseReference dbStudent;
+    DatabaseReference dbCourse;
+    DatabaseReference dbCourses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
+
+        dbCourse = FirebaseDatabase.getInstance().getReference("course");
+        dbStudent = FirebaseDatabase.getInstance().getReference("student");
+
 
         dialog = Glovar.loadingDialog(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -126,6 +135,12 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                 ArrayAdapter<String> adapterlecturers = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item,lecturer_array);
                 adapterlecturers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner_lecturer.setAdapter(adapterlecturers);
+                if (action.equalsIgnoreCase("edit_data_course")){
+                    int lectIndex = adapterlecturers.getPosition(course.getLecturer());
+                    spinner_lecturer.setSelection(lectIndex);
+                    Log.d("lecturer", String.valueOf(lectIndex)+course.getLecturer());
+                }
+
             }
 
             @Override
@@ -169,9 +184,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             int endIndex = adapterend.getPosition(course.getEnd());
             spinner_end.setSelection(endIndex);
 
-            int index = adapterlecturers.getPosition(course.getLecturer());
-            spinner_lecturer.setSelection(index);
-
 
             button_add_course.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -189,11 +201,13 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                     params.put("start", time1);
                     params.put("end", time2);
                     params.put("lecturer", lecturer);
-                    mDatabase.child(course.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                    dbCourse.child(course.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
                         //                    mDatabase.child("student").child(student.getUid()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             dialog.cancel();
+                            checkCourse(course.getId());
                             Intent intent;
                             Toast.makeText(AddCourse.this, "Course Data Updated Successful", Toast.LENGTH_SHORT).show();
                             intent = new Intent(AddCourse.this, CourseData.class);
@@ -343,5 +357,52 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         adapterend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_end.setAdapter(adapterend);
+    }
+    public void checkCourse(final String check){
+        dbStudent.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot stud : snapshot.getChildren()){
+                    dbCourses = dbStudent.child(stud.getValue(Student.class).getUid()).child("courses");
+                    dbCourses.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot cr : snapshot.getChildren()){
+                                cr.getValue(Course.class).getId();
+                                if (check.equals(cr.getValue(Course.class).getId())){
+                                    Map<String, Object> params = new HashMap<>();
+                                    params.put("subject", subject);
+                                    params.put("day", day);
+                                    params.put("start", time1);
+                                    params.put("end", time2);
+                                    params.put("lecturer", lecturer);
+                                    dbCourses.child(cr.getValue(Course.class).getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

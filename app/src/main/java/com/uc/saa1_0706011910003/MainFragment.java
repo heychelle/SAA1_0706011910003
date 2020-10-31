@@ -34,13 +34,13 @@ public class MainFragment extends AppCompatActivity {
         Intent intent = getIntent();
         action = intent.getStringExtra("edit");
 
-        if(action.equalsIgnoreCase("sch_frag")){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_main, new ScheduleFragment());
-            transaction.commit();
-        } else if(action.equalsIgnoreCase("edit_acc")){
+        if(action.equalsIgnoreCase("edit_acc")){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_main, new AccountFragment());
+            transaction.commit();
+        } else if(action.equalsIgnoreCase("sch_frag")){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_main, new ScheduleFragment());
             transaction.commit();
         }
 

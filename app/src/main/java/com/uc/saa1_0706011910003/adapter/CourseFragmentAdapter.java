@@ -160,11 +160,11 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                     if (courseDay.equalsIgnoreCase(crDay)) {
 
                         //ngecek kalau jam mulai berada dalam range waktu yang sudah diambil
-                        if (courseStart >= crStart && courseStart <= crEnd) {
+                        if (courseStart > crStart && courseStart < crEnd) {
                             conflict = true;
                         }
                         //ngecek kalau jam selesai berada dalam range waktu yang sudah diambil
-                        if (courseEnd >= crStart && courseEnd <= crEnd) {
+                        if (courseEnd > crStart && courseEnd < crEnd) {
                             conflict = true;
                         }
                     }

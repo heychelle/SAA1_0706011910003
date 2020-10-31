@@ -94,7 +94,8 @@ public class EditAccount extends AppCompatActivity implements TextWatcher {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditAccount.this, AccountFragment.class);
+                Intent intent = new Intent(EditAccount.this, MainFragment.class);
+                intent.putExtra("edit", "edit_acc");
                 startActivity(intent);
                 finish();
             }

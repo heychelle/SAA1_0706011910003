@@ -39,6 +39,7 @@ import com.uc.saa1_0706011910003.CourseData;
 import com.uc.saa1_0706011910003.Glovar;
 import com.uc.saa1_0706011910003.R;
 import com.uc.saa1_0706011910003.model.Course;
+import com.uc.saa1_0706011910003.model.Student;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
     private Context context;
     DatabaseReference dbCourse;
     DatabaseReference dbStudent;
+    DatabaseReference dbCourses;
     Dialog dialog;
     int pos = 0;
     FirebaseAuth firebaseAuth;
@@ -89,6 +91,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
             public void onClick(View v) {
                 v.startAnimation(klik);
                 Intent in = new Intent(context, AddCourse.class);
+                //yg dikirim value
                 in.putExtra("action", "edit_data_course");
                 in.putExtra("edit_data_course", course);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -113,10 +116,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
                                     @Override
                                     public void run() {
                                         dialog.cancel();
+                                        checkCourse(course.getId());
                                         dbCourse.child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
                                             @Override
                                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                                checkCourse(course);
                                                 Intent in = new Intent(context, CourseData.class);
                                                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
@@ -163,7 +166,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
             crLecturer = itemView.findViewById(R.id.lect_course);
 
             dbCourse = FirebaseDatabase.getInstance().getReference("course");
-            dbStudent = FirebaseDatabase.getInstance().getReference("student").child("courses");
+            dbStudent = FirebaseDatabase.getInstance().getReference("student");
 
             dialog = Glovar.loadingDialog(context);
 
@@ -172,18 +175,33 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
         }
 
     }
-    public void checkCourse(Course check){
-        final String courseId = check.getId();
-        dbStudent.addListenerForSingleValueEvent(new ValueEventListener(){
+    public void checkCourse(final String check){
+        dbStudent.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot childSnapshot : snapshot.getChildren()){
-                    Course course = childSnapshot.getValue(Course.class);
-                    if (dbStudent.child(course.getId()) == dbCourse.child(course.getId())){
+                for (DataSnapshot stud : snapshot.getChildren()){
+                    dbCourses = dbStudent.child(stud.getValue(Student.class).getUid()).child("courses");
+                    dbCourses.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot cr : snapshot.getChildren()){
+                                cr.getValue(Course.class).getId();
+                                if (check.equals(cr.getValue(Course.class).getId())){
+                                    dbCourses.child(cr.getValue(Course.class).getId()).removeValue(new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                            Log.d("yipii", check);
+                                        }
+                                    });
+                                }
+                            }
+                        }
 
-//                    dbStudent
-                        String crId = course.getId();
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
 
