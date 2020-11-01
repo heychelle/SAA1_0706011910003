@@ -64,24 +64,18 @@ public class CourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-//        if (listCourse.isEmpty()){
-//            imageView.setVisibility(View.VISIBLE);
-//        }else{
-//            imageView.setVisibility(View.INVISIBLE);
-//        }
-
         dbCourse = FirebaseDatabase.getInstance().getReference("course");
-//        no_data_cour = (ImageView) getView().findViewById(R.id.image_no_course);
+        no_data_cour = (ImageView) getView().findViewById(R.id.image_no_course);
         recyclerView = getView().findViewById(R.id.rv_frag_course);
 
-//        no_data_cour.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(), "Input Your Course First!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        no_data_cour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Input Your Course First!", Toast.LENGTH_SHORT).show();
+            }
+        });
         fetchCourseData();
+
     }
 
     public void fetchCourseData(){
@@ -95,6 +89,11 @@ public class CourseFragment extends Fragment {
                     recyclerView.setAdapter(null);
                 }
                 showCourseData(listCourse);
+                if (listCourse.isEmpty()){
+                    no_data_cour.setVisibility(View.VISIBLE);
+                }else{
+                    no_data_cour.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -102,6 +101,7 @@ public class CourseFragment extends Fragment {
 
             }
         });
+
     }
 
     public void showCourseData(final ArrayList<Course> list){

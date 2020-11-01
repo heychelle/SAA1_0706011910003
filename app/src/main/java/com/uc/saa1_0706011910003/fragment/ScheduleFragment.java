@@ -75,23 +75,16 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-//        if (listCourse.isEmpty()){
-//            imageView.setVisibility(View.VISIBLE);
-//        }else{
-//            imageView.setVisibility(View.INVISIBLE);
-//        }
-
         dbCourse = FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses");
-//        no_data_sch = (ImageView) getView().findViewById(R.id.image_no_sch);
+        no_data_sch = (ImageView) getView().findViewById(R.id.image_no_sch);
         recyclerView = getView().findViewById(R.id.rv_schedule_frag);
 
-//        no_data_sch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(), "Input Your Schedule First!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        no_data_sch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Input Your Schedule First!", Toast.LENGTH_SHORT).show();
+            }
+        });
         fetchCourseData();
     }
     public void fetchCourseData(){
@@ -102,9 +95,15 @@ public class ScheduleFragment extends Fragment {
                 for(DataSnapshot childSnapshot : snapshot.getChildren()){
                     course = childSnapshot.getValue(Course.class);
                     listCourse.add(course);
-//                    recyclerView.setAdapter(null);
+                    recyclerView.setAdapter(null);
                 }
                 showCourseData(listCourse);
+                if (listCourse.isEmpty()){
+                    no_data_sch.setVisibility(View.VISIBLE);
+                }else{
+                    no_data_sch.setVisibility(View.INVISIBLE);
+                }
+
             }
 
             @Override
