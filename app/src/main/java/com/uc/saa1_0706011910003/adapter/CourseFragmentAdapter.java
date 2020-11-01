@@ -182,7 +182,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                     new AlertDialog.Builder(context)
                             .setTitle("Warning")
                             .setIcon(R.drawable.logo2)
-                            .setMessage("You cannot take  " + course.getSubject() + ", check again your schedule!")
+                            .setMessage("You cannot take this course, check again your schedule!")
                             .setCancelable(false)
                             .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
