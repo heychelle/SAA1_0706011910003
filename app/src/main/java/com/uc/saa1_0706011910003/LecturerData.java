@@ -41,6 +41,7 @@ public class LecturerData extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+            //path
             dbLecturer = FirebaseDatabase.getInstance().getReference("lecturer");
             rv_lect_data = findViewById(R.id.rv_lect_data);
             fetchLecturerData();
@@ -57,7 +58,7 @@ public class LecturerData extends AppCompatActivity {
         });
         }
 
-        //ambil data lect
+        //ambil data lect d firebase
     public void fetchLecturerData(){
         dbLecturer.addValueEventListener(new ValueEventListener() {
             @Override
@@ -85,6 +86,7 @@ public class LecturerData extends AppCompatActivity {
         lecturerAdapter.setListLecturer(list);
         rv_lect_data.setAdapter(lecturerAdapter);
 
+        //klik card, dan nampilin ke detail
         ItemClickSupport.addTo(rv_lect_data).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {

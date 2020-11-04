@@ -55,6 +55,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reg);
 
@@ -179,6 +180,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     public void addStudent(String memail, String mpassword, String mname, String mnim, String mgender, String mage, String maddress){
         getFormValue();
         dialog.show();
+        //klo kita buat email,password dia auto sign in sehingga kita hrs sign out
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -50,6 +50,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lecturer);
 
+        //akses ke firebase
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         dialog = Glovar.loadingDialog(this);
@@ -107,6 +108,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             button_add_lecturer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //dr yg diinput user
                     name = input_name_lecturer.getEditText().getText().toString().trim();
                     expertise = input_expertise.getEditText().getText().toString().trim();
                     AddLecturerActivity(name, gender, expertise);
@@ -115,6 +117,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         }else
         { //saat activity dari lecturer detail & mau mengupdate data
             getSupportActionBar().setTitle(R.string.edit_lecturer);
+            //lecturer ini yang bawa data"nya
             lecturer = intent.getParcelableExtra("edit_data_lect");
             input_name_lecturer.getEditText().setText(lecturer.getName());
             input_expertise.getEditText().setText(lecturer.getExpertise());
@@ -128,12 +131,15 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
                 @Override
                 public void onClick(View v) {
                     dialog.show();
+                    //ambil lagi data baru
                     name = input_name_lecturer.getEditText().getText().toString().trim();
                     expertise = input_expertise.getEditText().getText().toString().trim();
                     Map<String, Object> params = new HashMap<>();
+                    //yang dipetik itu hrs sesuai dengan di firebase
                     params.put("name", name);
                     params.put("expertise", expertise);
                     params.put("gender", gender);
+                    //akses path
                     mDatabase.child("lecturer").child(lecturer.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -153,7 +159,9 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
     //add lecturer
     public void AddLecturerActivity(String mnama, String mgender, String mexpertise) {
+        //generate key (id)
         String mid = mDatabase.child("lecturer").push().getKey();
+        //urutan sesuai model
         Lecturer lecturer = new Lecturer(mid, mnama, mgender, mexpertise);
         mDatabase.child("lecturer").child(mid).setValue(lecturer).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

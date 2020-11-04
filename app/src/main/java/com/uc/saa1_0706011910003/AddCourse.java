@@ -125,6 +125,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childSnapshot:snapshot.getChildren()){
+                    //ambil name lect
                     String firebase_lecturer = childSnapshot.child("name").getValue(String.class);
                     lecturer_array.add(firebase_lecturer);
                 }
@@ -359,14 +360,16 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         dbStudent.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //baca dengan loop id nya
+                //baca dengan loop id student
                 for (DataSnapshot stud : snapshot.getChildren()) {
                     dbCourses = dbStudent.child(stud.getValue(Student.class).getUid()).child("courses");
                     dbCourses.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot cr : snapshot.getChildren()) {
+                                //isinya student dlm 1 id
                                 cr.getValue(Course.class).getId();
+                                //ambil id course, klo ada baru di update
                                 if (check.equals(cr.getValue(Course.class).getId())) {
                                     Map<String, Object> params = new HashMap<>();
                                     params.put("subject", subject);

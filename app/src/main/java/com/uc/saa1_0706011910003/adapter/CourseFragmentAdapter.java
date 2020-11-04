@@ -85,14 +85,12 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-
         //set isi card yg ada di adapter fragment
         holder.crSubject.setText(course.getSubject());
         holder.crDay.setText(course.getDay());
         holder.crStart.setText(course.getStart());
         holder.crEnd.setText(course.getEnd());
         holder.crLecturer.setText(course.getLecturer());
-
 
         holder.button_enroll.setOnClickListener(new View.OnClickListener() {
 
@@ -143,9 +141,10 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
 
         //user input (belum ter enroll)
         final String courseDay = choose.getDay();
+        //merubah data nya jd bentuk int
         final int courseStart = Integer.parseInt(choose.getStart().replace(":", ""));
         final int courseEnd = Integer.parseInt(choose.getEnd().replace(":", ""));
-
+        //path
         FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

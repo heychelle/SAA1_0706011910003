@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardViewViewHolder>{
 
     private Context context;
+    //untuk nampung lecturer"
     private ArrayList<Lecturer> listLecturer;
     private ArrayList<Lecturer> getListLecturer() {
         return listLecturer;
@@ -39,7 +40,7 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardVi
         return new LecturerAdapter.CardViewViewHolder(view);
     }
 
-    @SuppressLint("ResourceAsColor")
+//    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final LecturerAdapter.CardViewViewHolder holder, int position) {
         //set text di card

@@ -124,7 +124,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
 
                                         String uid = student.getUid();
                                         Log.d("cobadong", uid);
-
+                                        //klo mau delete auth kita hrs sign in dlu
                                         firebaseAuth.signInWithEmailAndPassword(student.getEmail(),student.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -160,7 +160,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
         });
     }
 
-
+//banyaknya student di listStudent
     @Override
     public int getItemCount() {
         return getListStudent().size();

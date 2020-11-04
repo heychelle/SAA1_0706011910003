@@ -79,7 +79,7 @@ public class MainFragment extends AppCompatActivity {
         transaction.commit();
     }
 
-
+    //set default, pas dibuka dan masuk pertama kali
     @Override
     protected void onStart() {
         super.onStart();

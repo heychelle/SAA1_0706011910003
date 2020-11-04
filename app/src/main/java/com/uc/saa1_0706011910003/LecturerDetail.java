@@ -64,6 +64,7 @@ public class LecturerDetail extends AppCompatActivity {
         pos = intent.getIntExtra("position",0);
         lecturer = intent.getParcelableExtra("data_lecturer");
 
+        //set
         text_name.setText(lecturer.getName());
         text_gender.setText(lecturer.getGender());
         text_expertise.setText(lecturer.getExpertise());
@@ -85,6 +86,7 @@ public class LecturerDetail extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         dialog.cancel();
+                                        //ambil id
                                         dbLecturer.child(lecturer.getId()).removeValue(new DatabaseReference.CompletionListener() {
                                             @Override
                                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
