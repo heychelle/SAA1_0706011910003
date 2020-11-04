@@ -73,6 +73,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     @NonNull
     @Override
     public CourseFragmentAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //layout mana
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_course_fragment_adapter, parent, false);
         return new CourseFragmentAdapter.CardViewViewHolder(view);
     }
@@ -84,8 +85,8 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-//        ArrayList<Course> finalListCourse = listCourse;
 
+        //set isi card yg ada di adapter fragment
         holder.crSubject.setText(course.getSubject());
         holder.crDay.setText(course.getDay());
         holder.crStart.setText(course.getStart());
@@ -129,6 +130,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
         });
     }
 
+    //mutablelivedata berfungsi untuk ubah value-nya
     MutableLiveData<Course> courseAdd = new MutableLiveData<>();
 
     public MutableLiveData<Course> getCourseAdd() {
@@ -160,11 +162,11 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                     if (courseDay.equalsIgnoreCase(crDay)) {
 
                         //ngecek kalau jam mulai berada dalam range waktu yang sudah diambil
-                        if (courseStart > crStart && courseStart < crEnd) {
+                        if (courseStart >= crStart && courseStart < crEnd) {
                             conflict = true;
                         }
                         //ngecek kalau jam selesai berada dalam range waktu yang sudah diambil
-                        if (courseEnd > crStart && courseEnd < crEnd) {
+                        if (courseEnd > crStart && courseEnd <= crEnd) {
                             conflict = true;
                         }
                     }
@@ -230,7 +232,6 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
             crLecturer = itemView.findViewById(R.id.course_lect_frag);
 
             dbCourse = FirebaseDatabase.getInstance().getReference("course");
-//                dbStudent = FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses");
 
             dbCourse.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

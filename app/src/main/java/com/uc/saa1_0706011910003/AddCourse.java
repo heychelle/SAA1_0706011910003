@@ -17,18 +17,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,24 +50,25 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     DatabaseReference mDatabase;
     List<String> lecturer_array;
     ArrayAdapter<CharSequence> adapterend;
-
+    ArrayList<Lecturer> lecturerArrayList;
     DatabaseReference dbStudent;
     DatabaseReference dbCourse;
     DatabaseReference dbCourses;
+    DatabaseReference dbLect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
 
+        //path di firebase
         dbCourse = FirebaseDatabase.getInstance().getReference("course");
         dbStudent = FirebaseDatabase.getInstance().getReference("student");
-
+        dbLect = FirebaseDatabase.getInstance().getReference("lecturer");
 
         dialog = Glovar.loadingDialog(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         toolbar = findViewById(R.id.toolbar_add_course);
-
         input_course_subject = findViewById(R.id.input_course_subject);
         spinner_day = findViewById(R.id.spinner_day);
         spinner_start = findViewById(R.id.spinner_time1);
@@ -91,6 +86,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             }
         });
 
+        //set spinner
         spinner_day = findViewById(R.id.spinner_day);
         ArrayAdapter<CharSequence> adapterdays = ArrayAdapter.createFromResource(this, R.array.days, android.R.layout.simple_spinner_item);
         adapterdays.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -117,13 +113,13 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                  adapterend = null;
                  setSpinner_end(position);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
+        //akses lecturer utk dapetin namenya yg di set ke spinner
         lecturer_array = new ArrayList<>();
         mDatabase.child("lecturer").addValueEventListener(new ValueEventListener() {
             @Override
@@ -149,11 +145,11 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             }
         });
 
+        //klo masuk dr starter
         Intent intent = getIntent();
         action = intent.getStringExtra("action");
         if(action.equalsIgnoreCase("add")){
             getSupportActionBar().setTitle(R.string.add_course);
-//            toolbar.setTitle("Add Course");
             button_add_course.setText("Add");
             button_add_course.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -166,12 +162,14 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                     addCourse(subject,day,time1,time2,lecturer);
                 }
             });
-        }else {
+        }
+        //masuk dari button edit di adapter
+        else {
             getSupportActionBar().setTitle(R.string.edit_course);
-//            toolbar.setTitle("Edit Course");
             button_add_course.setText("Edit");
             course = intent.getParcelableExtra("edit_data_course");
 
+            //set text pada spinner dan subject
             input_course_subject.getEditText().setText(course.getSubject());
 
             int dayIndex = adapterdays.getPosition(course.getDay());
@@ -183,7 +181,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             setSpinner_end(startIndex);
             int endIndex = adapterend.getPosition(course.getEnd());
             spinner_end.setSelection(endIndex);
-
 
             button_add_course.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -228,11 +225,9 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             mDatabase.child("course").child(mid).setValue(course).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-//                    Intent intent;
-//                    intent = new Intent(AddCourse.this, StarterActivity.class);
-//                    startActivity(intent);
                     dialog.cancel();
                     Toast.makeText(AddCourse.this, "Add Course Successfully", Toast.LENGTH_SHORT).show();
+                    //ketika button di click, set smua back to awal
                     input_course_subject.getEditText().setText("");
                     spinner_day.setSelection(0);
                     spinner_start.setSelection(0);
@@ -277,6 +272,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        //menu pojok kanan
         getMenuInflater().inflate(R.menu.course_menu, menu);
         return true;
     }
@@ -314,6 +310,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         finish();
     }
 
+    //isi spinner time
     public void setSpinner_end(int position){
         if(position==0){
             adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.jam_end0730, android.R.layout.simple_spinner_item);
@@ -358,18 +355,19 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         adapterend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_end.setAdapter(adapterend);
     }
-    public void checkCourse(final String check){
-        dbStudent.addValueEventListener(new ValueEventListener(){
+    public void checkCourse(final String check) {
+        dbStudent.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot stud : snapshot.getChildren()){
+                //baca dengan loop id nya
+                for (DataSnapshot stud : snapshot.getChildren()) {
                     dbCourses = dbStudent.child(stud.getValue(Student.class).getUid()).child("courses");
                     dbCourses.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot cr : snapshot.getChildren()){
+                            for (DataSnapshot cr : snapshot.getChildren()) {
                                 cr.getValue(Course.class).getId();
-                                if (check.equals(cr.getValue(Course.class).getId())){
+                                if (check.equals(cr.getValue(Course.class).getId())) {
                                     Map<String, Object> params = new HashMap<>();
                                     params.put("subject", subject);
                                     params.put("day", day);

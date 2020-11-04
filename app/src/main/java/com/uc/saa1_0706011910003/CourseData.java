@@ -37,6 +37,7 @@ public class CourseData extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout + toolbar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_data);
         toolbar = findViewById(R.id.toolbar_course_data);
@@ -44,6 +45,7 @@ public class CourseData extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //path
         dbCourse = FirebaseDatabase.getInstance().getReference("course");
         rv_course_data = findViewById(R.id.rv_course_data);
         fetchCourseData();
@@ -60,6 +62,7 @@ public class CourseData extends AppCompatActivity {
         });
     }
 
+    //ambil data course
     public void fetchCourseData(){
         dbCourse.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,6 +83,7 @@ public class CourseData extends AppCompatActivity {
         });
     }
 
+    //show data ke rv
     public void showCourseData(final ArrayList<Course> list){
         rv_course_data.setLayoutManager(new LinearLayoutManager(CourseData.this));
         CourseAdapter CourseAdapter = new CourseAdapter(CourseData.this);

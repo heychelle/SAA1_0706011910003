@@ -18,7 +18,6 @@ import com.uc.saa1_0706011910003.fragment.ScheduleFragment;
 public class MainFragment extends AppCompatActivity {
 
     Toolbar toolbar;
-//    Fragment fragment;
     BottomNavigationView bottomNavigationView;
     String action="";
 

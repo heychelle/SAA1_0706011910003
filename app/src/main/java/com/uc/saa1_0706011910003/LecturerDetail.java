@@ -44,6 +44,7 @@ public class LecturerDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer_detail);
         toolbar = findViewById(R.id.toolbar_lect_detail);

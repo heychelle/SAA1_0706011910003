@@ -35,10 +35,10 @@ public class StudentData extends AppCompatActivity {
     RecyclerView rv_stud_data;
     Student student;
     Intent intent;
-    Button button_edit, button_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_data);
         toolbar = findViewById(R.id.toolbar_stud_data);
@@ -46,6 +46,7 @@ public class StudentData extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //path
         dbStudent = FirebaseDatabase.getInstance().getReference("student");
         rv_stud_data = findViewById(R.id.rv_stud_data);
         fetchStudentData();
@@ -62,6 +63,7 @@ public class StudentData extends AppCompatActivity {
         });
     }
 
+    //ambil data
     public void fetchStudentData(){
         dbStudent.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,6 +84,7 @@ public class StudentData extends AppCompatActivity {
         });
     }
 
+    //show data
     public void showStudentData(final ArrayList<Student> list){
         rv_stud_data.setLayoutManager(new LinearLayoutManager(StudentData.this));
         StudentAdapter studentAdapter = new StudentAdapter(StudentData.this);

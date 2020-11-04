@@ -44,12 +44,9 @@ public class ScheduleFragment extends Fragment {
 
     ImageView no_data_sch;
     RecyclerView recyclerView;
-    Adapter ScheduleAdapter;
     FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
     Course course;
     DatabaseReference dbCourse;
-    ImageView imageView;
     ArrayList<Course> listCourse = new ArrayList<>();
 
     public ScheduleFragment() {
@@ -59,14 +56,15 @@ public class ScheduleFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //cek student yg login
         firebaseAuth = FirebaseAuth.getInstance();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //layout
         return inflater.inflate(R.layout.activity_schedule_fragment, container, false);
     }
 
@@ -75,6 +73,7 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //path
         dbCourse = FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("courses");
         no_data_sch = (ImageView) getView().findViewById(R.id.image_no_sch);
         recyclerView = getView().findViewById(R.id.rv_schedule_frag);
@@ -87,6 +86,8 @@ public class ScheduleFragment extends Fragment {
         });
         fetchCourseData();
     }
+
+    //ambil data
     public void fetchCourseData(){
         dbCourse.addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,6 +114,7 @@ public class ScheduleFragment extends Fragment {
         });
     }
 
+    //menampilkan data
     public void showCourseData(final ArrayList<Course> list){
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ScheduleAdapter ScheduleAdapter = new ScheduleAdapter(getActivity());

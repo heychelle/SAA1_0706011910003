@@ -28,6 +28,7 @@ public class StarterActivity extends AppCompatActivity {
         button_add_course = findViewById(R.id.button_add_course);
         button_login_student = findViewById(R.id.button_login_student);
 
+        //cek apakah ada user yg masih login, klo iya masuk fragment
         if(firebaseAuth.getCurrentUser() != null){
             Toast.makeText(StarterActivity.this,"Welcome Back", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(StarterActivity.this, MainFragment.class);
@@ -39,7 +40,6 @@ public class StarterActivity extends AppCompatActivity {
         button_add_student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // TODO Auto-generated method stub
                 intent = new Intent (StarterActivity.this, StudentRegister.class);
                 intent.putExtra("action", "add");
@@ -52,7 +52,6 @@ public class StarterActivity extends AppCompatActivity {
         button_add_lecturer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // TODO Auto-generated method stub
                 intent = new Intent (StarterActivity.this, AddLecturer.class);
                 intent.putExtra("action", "add");
@@ -65,7 +64,6 @@ public class StarterActivity extends AppCompatActivity {
         button_add_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // TODO Auto-generated method stub
                 intent = new Intent (StarterActivity.this, AddCourse.class);
                 intent.putExtra("action", "add");
@@ -78,7 +76,6 @@ public class StarterActivity extends AppCompatActivity {
         button_login_student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // TODO Auto-generated method stub
                 intent = new Intent (StarterActivity.this, StudentLogin.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

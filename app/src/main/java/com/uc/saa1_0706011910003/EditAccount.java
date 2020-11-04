@@ -46,7 +46,6 @@ public class EditAccount extends AppCompatActivity implements TextWatcher {
     Button button_register;
     Toolbar toolbar;
     Dialog dialog;
-    //    Intent intent;
     RadioButton radio_button;
     RadioGroup radio_group;
     private DatabaseReference mDatabase;
@@ -57,6 +56,7 @@ public class EditAccount extends AppCompatActivity implements TextWatcher {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
@@ -158,15 +158,9 @@ public class EditAccount extends AppCompatActivity implements TextWatcher {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.student_menu, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = ;
         switch (item.getItemId()) {
             case android.R.id.home: {
                 Intent intent = new Intent(this, StarterActivity.class);
@@ -180,14 +174,6 @@ public class EditAccount extends AppCompatActivity implements TextWatcher {
         return super.onOptionsItemSelected(item);
     }
 
-//    public void getFormValue(){
-//        email = input_email.getEditText().getText().toString().trim();
-//        name = input_name.getEditText().getText().toString().trim();
-//        nim = input_nim.getEditText().getText().toString().trim();
-//        age = input_age.getEditText().getText().toString().trim();
-//        address = input_address.getEditText().getText().toString().trim();
-////        gender = radio_button.getText().toString();
-//    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -200,7 +186,7 @@ public class EditAccount extends AppCompatActivity implements TextWatcher {
         nim = input_nim.getEditText().getText().toString().trim();
         age = input_age.getEditText().getText().toString().trim();
         address = input_address.getEditText().getText().toString().trim();
-//        gender = radio_button.getText().toString();
+
         if (!name.isEmpty() && !nim.isEmpty() && !age.isEmpty() && !address.isEmpty() ) {
             button_register.setEnabled(true);
         } else {

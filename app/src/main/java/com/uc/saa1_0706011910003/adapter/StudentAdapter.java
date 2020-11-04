@@ -70,6 +70,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
     @NonNull
     @Override
     public StudentAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_student_adapter, parent, false);
         return new StudentAdapter.CardViewViewHolder(view);
     }
@@ -77,6 +78,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final StudentAdapter.CardViewViewHolder holder, int position) {
+        //set text di card
         final Student student = getListStudent().get(position);
         holder.studEmail.setText(student.getEmail());
         holder.studName.setText(student.getName());
@@ -85,12 +87,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
         holder.studAge.setText(student.getAge());
         holder.studAddress.setText(student.getAddress());
 
-
+        //akses firebase
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-//        intent = getIntent();
-//        pos = intent.getIntExtra("position",0);
-//        student = intent.getParcelableExtra("data_student");
 
         holder.button_edit.setOnClickListener(new View.OnClickListener(){
 
@@ -145,18 +144,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
                                                 });
                                             }
                                         });
-//                                        dbStudent.child(student.getUid()).removeValue(new DatabaseReference.CompletionListener() {
-//                                            @Override
-//                                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//
-//                                                Intent in = new Intent(context, StudentData.class);
-//                                                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                                Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
-//                                                context.startActivity(in);
-////                                                finish();
-//                                                dialogInterface.cancel();
-//                                            }
-//                                        });
                                     }
                                 }, 2000);
                             }

@@ -34,6 +34,7 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardVi
     @NonNull
     @Override
     public LecturerAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //layout mana
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lecturer_adapter, parent, false);
         return new LecturerAdapter.CardViewViewHolder(view);
     }
@@ -41,6 +42,7 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardVi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final LecturerAdapter.CardViewViewHolder holder, int position) {
+        //set text di card
         final Lecturer lecturer = getListLecturer().get(position);
         holder.lectName.setText(lecturer.getName());
         holder.lectGender.setText(lecturer.getGender());

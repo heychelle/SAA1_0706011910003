@@ -57,6 +57,7 @@ public class LecturerData extends AppCompatActivity {
         });
         }
 
+        //ambil data lect
     public void fetchLecturerData(){
         dbLecturer.addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,6 +78,7 @@ public class LecturerData extends AppCompatActivity {
         });
     }
 
+    //nampilin ke rv
     public void showLecturerData(final ArrayList<Lecturer> list){
         rv_lect_data.setLayoutManager(new LinearLayoutManager(LecturerData.this));
         LecturerAdapter lecturerAdapter = new LecturerAdapter(LecturerData.this);

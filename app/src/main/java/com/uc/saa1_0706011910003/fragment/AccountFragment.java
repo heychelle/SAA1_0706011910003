@@ -61,6 +61,7 @@ public class AccountFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 //        firebaseUser = FirebaseUser.getCurrentUser();
 
+        //ambil data student
         dbStudent = FirebaseDatabase.getInstance().getReference("student").child(firebaseAuth.getCurrentUser().getUid());
 
         dialog = Glovar.loadingDialog(getActivity());
@@ -81,6 +82,7 @@ public class AccountFragment extends Fragment {
     }
 
     public void setData(){
+        //set text
         text_fname.setText(student.getName());
         text_email.setText(student.getEmail());
         text_nim.setText(student.getNim());
@@ -93,6 +95,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //layout mana
         return inflater.inflate(R.layout.activity_account_fragment, container, false);
     }
 
@@ -156,10 +159,6 @@ public class AccountFragment extends Fragment {
                         })
                         .create()
                         .show();
-
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(getActivity(), SplashScreen.class);
-//                startActivity(intent);
             }
         });
     }

@@ -60,6 +60,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.CardVi
     @NonNull
     @Override
     public ScheduleAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //layput mana
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_schedule_adapter, parent, false);
         return new ScheduleAdapter.CardViewViewHolder(view);
     }
@@ -67,6 +68,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.CardVi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final ScheduleAdapter.CardViewViewHolder holder, int position) {
+        //set text di card
         final Course course = getListCourse().get(position);
         holder.crSubject.setText(course.getSubject());
         holder.crDay.setText(course.getDay());

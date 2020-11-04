@@ -37,9 +37,7 @@ public class CourseFragment extends Fragment {
     ImageView no_data_cour;
     Course course;
     RecyclerView recyclerView;
-    Adapter ScheduleAdapter;
     DatabaseReference dbCourse;
-    ImageView imageView;
     ArrayList<Course> listCourse = new ArrayList<>();
 
 
@@ -58,12 +56,14 @@ public class CourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //layout mana
         return inflater.inflate(R.layout.fragment_course, container, false);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //path nya
         dbCourse = FirebaseDatabase.getInstance().getReference("course");
         no_data_cour = (ImageView) getView().findViewById(R.id.image_no_course);
         recyclerView = getView().findViewById(R.id.rv_frag_course);
@@ -75,9 +75,9 @@ public class CourseFragment extends Fragment {
             }
         });
         fetchCourseData();
-
     }
 
+    //ambil data
     public void fetchCourseData(){
         dbCourse.addValueEventListener(new ValueEventListener() {
             @Override
@@ -104,6 +104,7 @@ public class CourseFragment extends Fragment {
 
     }
 
+    //menampilkan data
     public void showCourseData(final ArrayList<Course> list){
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         CourseFragmentAdapter CourseFragmentAdapter = new CourseFragmentAdapter(getActivity());

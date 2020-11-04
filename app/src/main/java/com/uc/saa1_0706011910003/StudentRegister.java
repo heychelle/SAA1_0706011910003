@@ -45,7 +45,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     Button button_register;
     Toolbar toolbar;
     Dialog dialog;
-//    Intent intent;
     RadioButton radio_button;
     RadioGroup radio_group;
     private DatabaseReference mDatabase;
@@ -62,6 +61,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         dialog = Glovar.loadingDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+        //path
         mDatabase = FirebaseDatabase.getInstance().getReference("student");
 
         toolbar = findViewById(R.id.toolbar_student_register);
@@ -116,7 +116,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                     nim = input_nim.getEditText().getText().toString().trim();
                     age = input_age.getEditText().getText().toString().trim();
                     address = input_address.getEditText().getText().toString().trim();
-//                    addStudent(name, gender, expertise);
                     addStudent(email,password,name,nim,gender,age,address);
                 }
             });
@@ -176,10 +175,10 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         }
     }
 
+    //add data student
     public void addStudent(String memail, String mpassword, String mname, String mnim, String mgender, String mage, String maddress){
         getFormValue();
         dialog.show();
-//        String mid = mDatabase.child("student").push().getKey();
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -198,7 +197,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                             finish();
                         }
                     });
-//                    mAuth.signOut();
                 }else{
                     try {
                         throw task.getException();
@@ -223,7 +221,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = ;
         switch (item.getItemId()) {
             case android.R.id.home: {
                 Intent intent = new Intent(this, StarterActivity.class);
@@ -252,7 +249,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         nim = input_nim.getEditText().getText().toString().trim();
         age = input_age.getEditText().getText().toString().trim();
         address = input_address.getEditText().getText().toString().trim();
-//        gender = radio_button.getText().toString();
     }
 
     @Override
@@ -268,7 +264,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
             nim = input_nim.getEditText().getText().toString().trim();
             age = input_age.getEditText().getText().toString().trim();
             address = input_address.getEditText().getText().toString().trim();
-//        gender = radio_button.getText().toString();
             if (!email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !nim.isEmpty() && !age.isEmpty() && !address.isEmpty() ) {
                 button_register.setEnabled(true);
             } else {

@@ -32,11 +32,11 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
     Button button_login_student;
     FirebaseAuth firebaseAuth;
     Intent intent;
-    Student student;
     Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
 
@@ -62,7 +62,7 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
                 dialog.show();
                 email = input_email.getEditText().getText().toString().trim();
                 password = input_password.getEditText().getText().toString().trim();
-
+                //sign in
                 firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -74,7 +74,6 @@ public class StudentLogin extends AppCompatActivity implements TextWatcher {
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
-//                            startActivity(new Intent(getApplicationContext().ScheduleFragment));
                         }else{
                             Toast.makeText(StudentLogin.this,"Login Failed", Toast.LENGTH_SHORT).show();
                         }

@@ -46,6 +46,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lecturer);
 
@@ -78,6 +79,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             }
         });
 
+        //set radio button by default
         radio_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -100,8 +102,6 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
         if(action.equalsIgnoreCase("add"))
         {
-//            toolbar.setTitle("Add Lecturer");
-//            button_add_lecturer.setText("Add Lecturer Data");
             getSupportActionBar().setTitle(R.string.add_lecturer);
             button_add_lecturer.setText(R.string.add_lecturer);
             button_add_lecturer.setOnClickListener(new View.OnClickListener() {
@@ -151,6 +151,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         }
     }
 
+    //add lecturer
     public void AddLecturerActivity(String mnama, String mgender, String mexpertise) {
         String mid = mDatabase.child("lecturer").push().getKey();
         Lecturer lecturer = new Lecturer(mid, mnama, mgender, mexpertise);
@@ -202,6 +203,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        //menu pojok kanan
         getMenuInflater().inflate(R.menu.lecturer_menu, menu);
         return true;
     }

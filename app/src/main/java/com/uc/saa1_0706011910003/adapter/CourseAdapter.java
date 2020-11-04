@@ -70,6 +70,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
     @NonNull
     @Override
     public CourseAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //ke layout mana
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_course_adapter, parent, false);
         return new CourseAdapter.CardViewViewHolder(view);
     }
@@ -77,6 +78,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final CourseAdapter.CardViewViewHolder holder, int position) {
+        //set text yg show di card
         final Course course = getListCourse().get(position);
         holder.crSubject.setText(course.getSubject());
         holder.crDay.setText(course.getDay());
@@ -84,14 +86,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
         holder.crEnd.setText(course.getEnd());
         holder.crLecturer.setText(course.getLecturer());
 
-
+        //button edit di klik menuju edit course
         holder.button_edit.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 v.startAnimation(klik);
                 Intent in = new Intent(context, AddCourse.class);
-                //yg dikirim value
+                //yg dikirim value (namanya)
                 in.putExtra("action", "edit_data_course");
                 in.putExtra("edit_data_course", course);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -99,6 +101,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
 //                finish();
             }
         });
+        //button delete, ada alert
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,14 +120,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
                                     public void run() {
                                         dialog.cancel();
                                         checkCourse(course.getId());
+                                        //ambil id, lalu delete
                                         dbCourse.child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
                                             @Override
                                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                                 Intent in = new Intent(context, CourseData.class);
                                                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
-//                                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(context);
-//                                                context.startActivity(in, options.toBundle());
                                                 context.startActivity(in);
                                                 ((Activity)context).finish();
                                                 dialogInterface.cancel();
@@ -165,6 +167,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
             crEnd = itemView.findViewById(R.id.time_end_course);
             crLecturer = itemView.findViewById(R.id.lect_course);
 
+            //akses ke path apa
             dbCourse = FirebaseDatabase.getInstance().getReference("course");
             dbStudent = FirebaseDatabase.getInstance().getReference("student");
 
@@ -175,15 +178,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
         }
 
     }
+
+    //cascade, ketika parent kebuang maka course yg sudah di take student akan ikut terbuang
     public void checkCourse(final String check){
         dbStudent.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //ambil data dari firebase, berupa datasnapshot
                 for (DataSnapshot stud : snapshot.getChildren()){
+                    //path akses kemana
                     dbCourses = dbStudent.child(stud.getValue(Student.class).getUid()).child("courses");
                     dbCourses.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //baca id satu" dari course yg sudah di take student
                             for (DataSnapshot cr : snapshot.getChildren()){
                                 cr.getValue(Course.class).getId();
                                 if (check.equals(cr.getValue(Course.class).getId())){
