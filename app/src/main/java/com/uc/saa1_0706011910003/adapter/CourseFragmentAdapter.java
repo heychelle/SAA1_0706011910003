@@ -128,7 +128,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
         });
     }
 
-    //mutablelivedata berfungsi untuk ubah value-nya
+    //mutablelivedata berfungsi untuk ubah value-nya, cek overlap
     MutableLiveData<Course> courseAdd = new MutableLiveData<>();
 
     public MutableLiveData<Course> getCourseAdd() {
