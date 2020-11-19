@@ -319,4 +319,6 @@
     <string name="time_course">Time:</string>
     <string name="course_data">Course Data</string>
     <string name="edit_account">Edit Account</string>
+
+    <string name="fcm_key">AAAA5hMYgjQ:APA91bEobyt0cFJoy8wMfUgJoyMP46Gtn6B5A4j_W3BRICX3AGu168FeKRVthMSJBk6HPKnHg1WEDuJ1fAyuizs-fKyzqsWhcOR5mTeViIJgFona16De4FZ5fw_y8GRyd7MBPvF9A7Wv</string>
 </resources>

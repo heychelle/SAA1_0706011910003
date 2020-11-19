@@ -12,6 +12,7 @@ public class Student implements Parcelable {
     private String gender;
     private String age;
     private String address;
+    private String token;
 
     protected Student(Parcel in) {
         uid = in.readString();
@@ -22,6 +23,7 @@ public class Student implements Parcelable {
         gender = in.readString();
         age = in.readString();
         address = in.readString();
+        token = in.readString();
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {
@@ -68,7 +70,11 @@ public class Student implements Parcelable {
         return address;
     }
 
-    public Student(String uid, String email, String password, String name, String nim, String gender, String age, String address) {
+    public String getToken() {
+        return token;
+    }
+
+    public Student(String uid, String email, String password, String name, String nim, String gender, String age, String address, String token) {
         this.uid = uid;
         this.email = email;
         this.password = password;
@@ -77,6 +83,7 @@ public class Student implements Parcelable {
         this.gender = gender;
         this.age = age;
         this.address = address;
+        this.token = token;
     }
 
 
@@ -97,5 +104,6 @@ public class Student implements Parcelable {
         dest.writeString(gender);
         dest.writeString(age);
         dest.writeString(address);
+        dest.writeString(token);
     }
 }

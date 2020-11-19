@@ -41,7 +41,7 @@ import java.util.Map;
 public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
     TextInputLayout input_email, input_password, input_name, input_nim, input_age, input_address;
-    String uid="", email="", password="", name="", nim="", age="", gender="male", address="", action="";
+    String uid="", email="", password="", name="", nim="", age="", gender="male", address="", token="",action="";
     Button button_register;
     Toolbar toolbar;
     Dialog dialog;
@@ -117,7 +117,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                     nim = input_nim.getEditText().getText().toString().trim();
                     age = input_age.getEditText().getText().toString().trim();
                     address = input_address.getEditText().getText().toString().trim();
-                    addStudent(email,password,name,nim,gender,age,address);
+                    addStudent(email,password,name,nim,gender,age,address,token);
                 }
             });
         }else {
@@ -177,7 +177,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     }
 
     //add data student
-    public void addStudent(String memail, String mpassword, String mname, String mnim, String mgender, String mage, String maddress){
+    public void addStudent(String memail, String mpassword, String mname, String mnim, String mgender, String mage, String maddress, String mtoken){
         getFormValue();
         dialog.show();
         //klo kita buat email,password dia auto sign in sehingga kita hrs sign out
@@ -187,7 +187,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 if (task.isSuccessful()){
                     dialog.cancel();
                     uid = mAuth.getCurrentUser().getUid();
-                    Student student = new Student(uid,email,password,name,nim,gender,age,address);
+                    Student student = new Student(uid,email,password,name,nim,gender,age,address,"-");
                     mDatabase.child(uid).setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

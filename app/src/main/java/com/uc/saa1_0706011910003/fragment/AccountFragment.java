@@ -10,6 +10,7 @@ import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -46,10 +47,11 @@ public class AccountFragment extends Fragment {
     Dialog dialog;
     Student student;
     TextView text_fname, text_email, text_nim, text_gender, text_age, text_address;
-    DatabaseReference dbStudent;
+    DatabaseReference dbStudent,dbUser;
     ImageView edit_account;
     FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
+    SharedPreferences userPref;
+    SharedPreferences.Editor userEditor;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -59,10 +61,10 @@ public class AccountFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
-//        firebaseUser = FirebaseUser.getCurrentUser();
 
         //ambil data student
         dbStudent = FirebaseDatabase.getInstance().getReference("student").child(firebaseAuth.getCurrentUser().getUid());
+        dbUser = FirebaseDatabase.getInstance().getReference("student");
 
         dialog = Glovar.loadingDialog(getActivity());
 
@@ -97,6 +99,8 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         //layout mana
         return inflater.inflate(R.layout.activity_account_fragment, container, false);
+
+
     }
 
 
@@ -123,6 +127,9 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        userPref = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
+        userEditor = userPref.edit();
+
         signout = view.findViewById(R.id.button_signout_frag);
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +149,11 @@ public class AccountFragment extends Fragment {
                                     @Override
                                     public void run() {
                                         dialog.cancel();
+
+                                        dbUser.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("token").setValue("-");
+                                        userEditor.putString("utoken","-");
+                                        userEditor.commit();
+
                                         Toast.makeText(getActivity(), "Thank you!", Toast.LENGTH_SHORT).show();
                                         FirebaseAuth.getInstance().signOut();
                                                 Intent intent = new Intent(getActivity(), StarterActivity.class);

@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910003.AddCourse;
 import com.uc.saa1_0706011910003.CourseData;
 import com.uc.saa1_0706011910003.Glovar;
+import com.uc.saa1_0706011910003.MyNotificationManager;
 import com.uc.saa1_0706011910003.R;
 import com.uc.saa1_0706011910003.StudentData;
 import com.uc.saa1_0706011910003.model.Course;
@@ -55,6 +56,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     Course course;
     int pos = 0;
     private ArrayList<Course> listCourse;
+    MyNotificationManager myNotificationManager;
 
     private ArrayList<Course> getListCourse() {
         return listCourse;
@@ -111,7 +113,6 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                                     public void run() {
                                         dialog.cancel();
                                         CheckTime(course);
-
                                     }
                                 }, 2000);
                             }
@@ -202,6 +203,8 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                             .show();
                 } else {
                     courseAdd.setValue(choose);
+                    new MyNotificationManager(context).pushNotification(choose.getSubject());
+
                 }
             }
 
